@@ -13,22 +13,21 @@
         Transfer Protocol (HTTP), referred to as HTTP version 2 (HTTP/2). HTTP/2 enables a more
         efficient use of network resources and a
         reduced perception of latency by introducing header field compression and allowing multiple
-        concurrent exchanges on the same connection. It also introduces unsolicited push of
-        representations from servers to clients.
+        concurrent exchanges on the same connection.
        
        
         This specification is an alternative to, but does not obsolete, the HTTP/1.1 message syntax.
-        HTTP's existing semantics remain unchanged.
+        HTTP's existing semantics remain unchanged.  This document obsoletes RFC 7540 and RFC 8740.
        
     " name="description">
-<meta content="xml2rfc 3.5.0" name="generator">
+<meta content="xml2rfc 3.7.0" name="generator">
 <meta content="HTTP" name="keyword">
 <meta content="SPDY" name="keyword">
 <meta content="Web" name="keyword">
 <meta content="draft-ietf-httpbis-http2bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.5.0
-    Python 3.8.7
+  xml2rfc 3.7.0
+    Python 3.8.10
     appdirs 1.4.4
     ConfigArgParse 1.2.3
     google-i18n-address 2.4.0
@@ -36,7 +35,7 @@
     intervaltree 3.1.0
     Jinja2 2.11.2
     kitchen 1.2.6
-    lxml 4.6.2
+    lxml 4.6.3
     pycountry 20.7.3
     pyflakes 2.2.0
     PyYAML 5.4.1
@@ -96,11 +95,17 @@ body {
   color: var(--title-color);
 }
 #title {
-  padding: 1em 0 0.2em;
   font-size: 32px;
   line-height: 40px;
   clear: both;
 }
+#title, #rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+#rfcnum + #title {
+  margin: 0.2em 0;
+}
+
 h1, h2, h3 {
   font-size: 22px;
   line-height: 27px;
@@ -851,11 +856,11 @@ address div.right {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">HTTP/2</td>
-<td class="right">February 2021</td>
+<td class="right">May 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Thomson &amp; Benfield</td>
-<td class="center">Expires 27 August 2021</td>
+<td class="center">Expires 25 November 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -871,12 +876,12 @@ address div.right {
 <a href="https://datatracker.ietf.org/doc/html/rfc7540" class="eref">7540</a>, <a href="https://datatracker.ietf.org/doc/html/rfc8740" class="eref">8740</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-02-23" class="published">23 February 2021</time>
+<time datetime="2021-05-24" class="published">24 May 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-08-27">27 August 2021</time></dd>
+<dd class="expires"><time datetime="2021-11-25">25 November 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -900,20 +905,18 @@ address div.right {
         Transfer Protocol (HTTP), referred to as HTTP version 2 (HTTP/2). HTTP/2 enables a more
         efficient use of network resources and a
         reduced perception of latency by introducing header field compression and allowing multiple
-        concurrent exchanges on the same connection. It also introduces unsolicited push of
-        representations from servers to clients.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+        concurrent exchanges on the same connection.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">
         This specification is an alternative to, but does not obsolete, the HTTP/1.1 message syntax.
-        HTTP's existing semantics remain unchanged.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+        HTTP's existing semantics remain unchanged.  This document obsoletes RFC 7540 and RFC 8740.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
 <a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
       </h2>
 <p id="section-note.1-1">
-        Discussion of this document takes place on the
-        HTTPBIS Working Group mailing list (ietf-http-wg@w3.org),
-        which is archived at <span><a href="https://lists.w3.org/Archives/Public/ietf-http-wg/">https://lists.w3.org/Archives/Public/ietf-http-wg/</a></span>.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+        Discussion of this document takes place on the HTTPBIS Working Group mailing list
+        (ietf-http-wg@w3.org), which is archived at <span><a href="https://lists.w3.org/Archives/Public/ietf-http-wg/">https://lists.w3.org/Archives/Public/ietf-http-wg/</a></span>.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">This note is to be removed before publishing as an RFC.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Source for this draft and an issue tracker can be found at
@@ -938,7 +941,7 @@ address div.right {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 August 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 November 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -966,327 +969,318 @@ address div.right {
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
-<nav class="toc"><ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
+<nav class="toc"><ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-http-2-protocol-overview" class="xref">HTTP/2 Protocol Overview</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-document-organization" class="xref">Document Organization</a><a href="#section-toc.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-http-2-protocol-overview" class="xref">HTTP/2 Protocol Overview</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-document-organization" class="xref">Document Organization</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-conventions-and-terminology" class="xref">Conventions and Terminology</a><a href="#section-toc.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-</li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-starting-http-2" class="xref">Starting HTTP/2</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-http-2-version-identificati" class="xref">HTTP/2 Version Identification</a><a href="#section-toc.1-1.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-starting-http-2-for-https-u" class="xref">Starting HTTP/2 for "https" URIs</a><a href="#section-toc.1-1.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-starting-http-2-with-prior-" class="xref">Starting HTTP/2 with Prior Knowledge</a><a href="#section-toc.1-1.3.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-http-2-connection-preface" class="xref">HTTP/2 Connection Preface</a><a href="#section-toc.1-1.3.2.4.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-conventions-and-terminology" class="xref">Conventions and Terminology</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-http-frames" class="xref">HTTP Frames</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-frame-format" class="xref">Frame Format</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-starting-http-2" class="xref">Starting HTTP/2</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-http-2-version-identificati" class="xref">HTTP/2 Version Identification</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-frame-size" class="xref">Frame Size</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-starting-http-2-for-https-u" class="xref">Starting HTTP/2 for "https" URIs</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-field-section-compression-a" class="xref">Field Section Compression and Decompression</a><a href="#section-toc.1-1.4.2.3.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-starting-http-2-with-prior-" class="xref">Starting HTTP/2 with Prior Knowledge</a></p>
 </li>
-            </ul>
-</li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-streams-and-multiplexing" class="xref">Streams and Multiplexing</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-stream-states" class="xref">Stream States</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.5.2.1.2.1">
-                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="xref">5.1.1</a>.  <a href="#name-stream-identifiers" class="xref">Stream Identifiers</a><a href="#section-toc.1-1.5.2.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.1.2.2">
-                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="xref">5.1.2</a>.  <a href="#name-stream-concurrency" class="xref">Stream Concurrency</a><a href="#section-toc.1-1.5.2.1.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-flow-control" class="xref">Flow Control</a><a href="#section-toc.1-1.5.2.2.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.5.2.2.2.1">
-                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="xref">5.2.1</a>.  <a href="#name-flow-control-principles" class="xref">Flow-Control Principles</a><a href="#section-toc.1-1.5.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.2.2.2">
-                    <p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="xref">5.2.2</a>.  <a href="#name-appropriate-use-of-flow-con" class="xref">Appropriate Use of Flow Control</a><a href="#section-toc.1-1.5.2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-stream-priority" class="xref">Stream Priority</a><a href="#section-toc.1-1.5.2.3.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.5.2.3.2.1">
-                    <p id="section-toc.1-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="xref">5.3.1</a>.  <a href="#name-stream-dependencies" class="xref">Stream Dependencies</a><a href="#section-toc.1-1.5.2.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.3.2.2">
-                    <p id="section-toc.1-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="xref">5.3.2</a>.  <a href="#name-dependency-weighting" class="xref">Dependency Weighting</a><a href="#section-toc.1-1.5.2.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.3.2.3">
-                    <p id="section-toc.1-1.5.2.3.2.3.1"><a href="#section-5.3.3" class="xref">5.3.3</a>.  <a href="#name-reprioritization" class="xref">Reprioritization</a><a href="#section-toc.1-1.5.2.3.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.3.2.4">
-                    <p id="section-toc.1-1.5.2.3.2.4.1"><a href="#section-5.3.4" class="xref">5.3.4</a>.  <a href="#name-prioritization-state-manage" class="xref">Prioritization State Management</a><a href="#section-toc.1-1.5.2.3.2.4.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.3.2.5">
-                    <p id="section-toc.1-1.5.2.3.2.5.1"><a href="#section-5.3.5" class="xref">5.3.5</a>.  <a href="#name-default-priorities" class="xref">Default Priorities</a><a href="#section-toc.1-1.5.2.3.2.5.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-error-handling" class="xref">Error Handling</a><a href="#section-toc.1-1.5.2.4.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.5.2.4.2.1">
-                    <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="xref">5.4.1</a>.  <a href="#name-connection-error-handling" class="xref">Connection Error Handling</a><a href="#section-toc.1-1.5.2.4.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.4.2.2">
-                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="xref">5.4.2</a>.  <a href="#name-stream-error-handling" class="xref">Stream Error Handling</a><a href="#section-toc.1-1.5.2.4.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.4.2.3">
-                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="xref">5.4.3</a>.  <a href="#name-connection-termination" class="xref">Connection Termination</a><a href="#section-toc.1-1.5.2.4.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-extending-http-2" class="xref">Extending HTTP/2</a><a href="#section-toc.1-1.5.2.5.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-http-2-connection-preface" class="xref">HTTP/2 Connection Preface</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-frame-definitions" class="xref">Frame Definitions</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-data" class="xref">DATA</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-http-frames" class="xref">HTTP Frames</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-frame-format" class="xref">Frame Format</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-headers" class="xref">HEADERS</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-frame-size" class="xref">Frame Size</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-priority" class="xref">PRIORITY</a><a href="#section-toc.1-1.6.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="xref">6.4</a>.  <a href="#name-rst_stream" class="xref">RST_STREAM</a><a href="#section-toc.1-1.6.2.4.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="xref">6.5</a>.  <a href="#name-settings" class="xref">SETTINGS</a><a href="#section-toc.1-1.6.2.5.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.6.2.5.2.1">
-                    <p id="section-toc.1-1.6.2.5.2.1.1"><a href="#section-6.5.1" class="xref">6.5.1</a>.  <a href="#name-settings-format" class="xref">SETTINGS Format</a><a href="#section-toc.1-1.6.2.5.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.5.2.2">
-                    <p id="section-toc.1-1.6.2.5.2.2.1"><a href="#section-6.5.2" class="xref">6.5.2</a>.  <a href="#name-defined-settings-parameters" class="xref">Defined SETTINGS Parameters</a><a href="#section-toc.1-1.6.2.5.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.5.2.3">
-                    <p id="section-toc.1-1.6.2.5.2.3.1"><a href="#section-6.5.3" class="xref">6.5.3</a>.  <a href="#name-settings-synchronization" class="xref">Settings Synchronization</a><a href="#section-toc.1-1.6.2.5.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.6">
-                <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="xref">6.6</a>.  <a href="#name-push_promise" class="xref">PUSH_PROMISE</a><a href="#section-toc.1-1.6.2.6.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.7">
-                <p id="section-toc.1-1.6.2.7.1"><a href="#section-6.7" class="xref">6.7</a>.  <a href="#name-ping" class="xref">PING</a><a href="#section-toc.1-1.6.2.7.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.8">
-                <p id="section-toc.1-1.6.2.8.1"><a href="#section-6.8" class="xref">6.8</a>.  <a href="#name-goaway" class="xref">GOAWAY</a><a href="#section-toc.1-1.6.2.8.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.9">
-                <p id="section-toc.1-1.6.2.9.1"><a href="#section-6.9" class="xref">6.9</a>.  <a href="#name-window_update" class="xref">WINDOW_UPDATE</a><a href="#section-toc.1-1.6.2.9.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.6.2.9.2.1">
-                    <p id="section-toc.1-1.6.2.9.2.1.1"><a href="#section-6.9.1" class="xref">6.9.1</a>.  <a href="#name-the-flow-control-window" class="xref">The Flow-Control Window</a><a href="#section-toc.1-1.6.2.9.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.9.2.2">
-                    <p id="section-toc.1-1.6.2.9.2.2.1"><a href="#section-6.9.2" class="xref">6.9.2</a>.  <a href="#name-initial-flow-control-window" class="xref">Initial Flow-Control Window Size</a><a href="#section-toc.1-1.6.2.9.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.9.2.3">
-                    <p id="section-toc.1-1.6.2.9.2.3.1"><a href="#section-6.9.3" class="xref">6.9.3</a>.  <a href="#name-reducing-the-stream-window-" class="xref">Reducing the Stream Window Size</a><a href="#section-toc.1-1.6.2.9.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.6.2.10">
-                <p id="section-toc.1-1.6.2.10.1"><a href="#section-6.10" class="xref">6.10</a>. <a href="#name-continuation" class="xref">CONTINUATION</a><a href="#section-toc.1-1.6.2.10.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-field-section-compression-a" class="xref">Field Section Compression and Decompression</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-error-codes" class="xref">Error Codes</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-streams-and-multiplexing" class="xref">Streams and Multiplexing</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-stream-states" class="xref">Stream States</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.1.2.1">
+                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="xref">5.1.1</a>.  <a href="#name-stream-identifiers" class="xref">Stream Identifiers</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-http-message-exchanges" class="xref">HTTP Message Exchanges</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-http-message-framing" class="xref">HTTP Message Framing</a><a href="#section-toc.1-1.8.2.1.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.8.2.1.2.1">
-                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1" class="xref">8.1.1</a>.  <a href="#name-upgrading-from-http-2" class="xref">Upgrading from HTTP/2</a><a href="#section-toc.1-1.8.2.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.8.2.1.2.2">
-                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#section-8.1.2" class="xref">8.1.2</a>.  <a href="#name-http-fields" class="xref">HTTP Fields</a><a href="#section-toc.1-1.8.2.1.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.8.2.1.2.3">
-                    <p id="section-toc.1-1.8.2.1.2.3.1"><a href="#section-8.1.3" class="xref">8.1.3</a>.  <a href="#name-examples" class="xref">Examples</a><a href="#section-toc.1-1.8.2.1.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.8.2.1.2.4">
-                    <p id="section-toc.1-1.8.2.1.2.4.1"><a href="#section-8.1.4" class="xref">8.1.4</a>.  <a href="#name-request-reliability-mechani" class="xref">Request Reliability Mechanisms in HTTP/2</a><a href="#section-toc.1-1.8.2.1.2.4.1" class="pilcrow">¶</a></p>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.1.2.2">
+                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="xref">5.1.2</a>.  <a href="#name-stream-concurrency" class="xref">Stream Concurrency</a></p>
 </li>
                 </ul>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-server-push" class="xref">Server Push</a><a href="#section-toc.1-1.8.2.2.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.8.2.2.2.1">
-                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="xref">8.2.1</a>.  <a href="#name-push-requests" class="xref">Push Requests</a><a href="#section-toc.1-1.8.2.2.2.1.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-flow-control" class="xref">Flow Control</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.2.2.1">
+                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="xref">5.2.1</a>.  <a href="#name-flow-control-principles" class="xref">Flow-Control Principles</a></p>
 </li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.8.2.2.2.2">
-                    <p id="section-toc.1-1.8.2.2.2.2.1"><a href="#section-8.2.2" class="xref">8.2.2</a>.  <a href="#name-push-responses" class="xref">Push Responses</a><a href="#section-toc.1-1.8.2.2.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.2.2.2">
+                    <p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="xref">5.2.2</a>.  <a href="#name-appropriate-use-of-flow-con" class="xref">Appropriate Use of Flow Control</a></p>
 </li>
                 </ul>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="xref">8.3</a>.  <a href="#name-the-connect-method" class="xref">The CONNECT Method</a><a href="#section-toc.1-1.8.2.3.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-prioritization" class="xref">Prioritization</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.3.2.1">
+                    <p id="section-toc.1-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="xref">5.3.1</a>.  <a href="#name-background-of-priority-in-h" class="xref">Background of Priority in HTTP/2</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.3.2.2">
+                    <p id="section-toc.1-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="xref">5.3.2</a>.  <a href="#name-priority-signaling-in-this-" class="xref">Priority Signaling in this Document</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-error-handling" class="xref">Error Handling</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.1">
+                    <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="xref">5.4.1</a>.  <a href="#name-connection-error-handling" class="xref">Connection Error Handling</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.2">
+                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="xref">5.4.2</a>.  <a href="#name-stream-error-handling" class="xref">Stream Error Handling</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4.2.3">
+                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="xref">5.4.3</a>.  <a href="#name-connection-termination" class="xref">Connection Termination</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-extending-http-2" class="xref">Extending HTTP/2</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-additional-http-requirement" class="xref">Additional HTTP Requirements/Considerations</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-connection-management" class="xref">Connection Management</a><a href="#section-toc.1-1.9.2.1.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.9.2.1.2.1">
-                    <p id="section-toc.1-1.9.2.1.2.1.1"><a href="#section-9.1.1" class="xref">9.1.1</a>.  <a href="#name-connection-reuse" class="xref">Connection Reuse</a><a href="#section-toc.1-1.9.2.1.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-frame-definitions" class="xref">Frame Definitions</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-data" class="xref">DATA</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-headers" class="xref">HEADERS</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-priority" class="xref">PRIORITY</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="xref">6.4</a>.  <a href="#name-rst_stream" class="xref">RST_STREAM</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.5">
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="xref">6.5</a>.  <a href="#name-settings" class="xref">SETTINGS</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.5.2.1">
+                    <p id="section-toc.1-1.6.2.5.2.1.1"><a href="#section-6.5.1" class="xref">6.5.1</a>.  <a href="#name-settings-format" class="xref">SETTINGS Format</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.5.2.2">
+                    <p id="section-toc.1-1.6.2.5.2.2.1"><a href="#section-6.5.2" class="xref">6.5.2</a>.  <a href="#name-defined-settings" class="xref">Defined Settings</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.5.2.3">
+                    <p id="section-toc.1-1.6.2.5.2.3.1"><a href="#section-6.5.3" class="xref">6.5.3</a>.  <a href="#name-settings-synchronization" class="xref">Settings Synchronization</a></p>
 </li>
                 </ul>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-use-of-tls-features" class="xref">Use of TLS Features</a><a href="#section-toc.1-1.9.2.2.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.9.2.2.2.1">
-                    <p id="section-toc.1-1.9.2.2.2.1.1"><a href="#section-9.2.1" class="xref">9.2.1</a>.  <a href="#name-tls-12-features" class="xref">TLS 1.2 Features</a><a href="#section-toc.1-1.9.2.2.2.1.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.6">
+                <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="xref">6.6</a>.  <a href="#name-push_promise" class="xref">PUSH_PROMISE</a></p>
 </li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.2.2.2">
-                    <p id="section-toc.1-1.9.2.2.2.2.1"><a href="#section-9.2.2" class="xref">9.2.2</a>.  <a href="#name-tls-12-cipher-suites" class="xref">TLS 1.2 Cipher Suites</a><a href="#section-toc.1-1.9.2.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.7">
+                <p id="section-toc.1-1.6.2.7.1"><a href="#section-6.7" class="xref">6.7</a>.  <a href="#name-ping" class="xref">PING</a></p>
 </li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.2.2.3">
-                    <p id="section-toc.1-1.9.2.2.2.3.1"><a href="#section-9.2.3" class="xref">9.2.3</a>.  <a href="#name-tls-13-features" class="xref">TLS 1.3 Features</a><a href="#section-toc.1-1.9.2.2.2.3.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.8">
+                <p id="section-toc.1-1.6.2.8.1"><a href="#section-6.8" class="xref">6.8</a>.  <a href="#name-goaway" class="xref">GOAWAY</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.9">
+                <p id="section-toc.1-1.6.2.9.1"><a href="#section-6.9" class="xref">6.9</a>.  <a href="#name-window_update" class="xref">WINDOW_UPDATE</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.9.2.1">
+                    <p id="section-toc.1-1.6.2.9.2.1.1"><a href="#section-6.9.1" class="xref">6.9.1</a>.  <a href="#name-the-flow-control-window" class="xref">The Flow-Control Window</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.9.2.2">
+                    <p id="section-toc.1-1.6.2.9.2.2.1"><a href="#section-6.9.2" class="xref">6.9.2</a>.  <a href="#name-initial-flow-control-window" class="xref">Initial Flow-Control Window Size</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.9.2.3">
+                    <p id="section-toc.1-1.6.2.9.2.3.1"><a href="#section-6.9.3" class="xref">6.9.3</a>.  <a href="#name-reducing-the-stream-window-" class="xref">Reducing the Stream Window Size</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.6.2.10">
+                <p id="section-toc.1-1.6.2.10.1"><a href="#section-6.10" class="xref">6.10</a>. <a href="#name-continuation" class="xref">CONTINUATION</a></p>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-error-codes" class="xref">Error Codes</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-http-message-exchanges" class="xref">HTTP Message Exchanges</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-http-message-framing" class="xref">HTTP Message Framing</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.8.2.1.2.1">
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1" class="xref">8.1.1</a>.  <a href="#name-upgrading-from-http-2" class="xref">Upgrading from HTTP/2</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.8.2.1.2.2">
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#section-8.1.2" class="xref">8.1.2</a>.  <a href="#name-http-fields" class="xref">HTTP Fields</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.8.2.1.2.3">
+                    <p id="section-toc.1-1.8.2.1.2.3.1"><a href="#section-8.1.3" class="xref">8.1.3</a>.  <a href="#name-examples" class="xref">Examples</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.8.2.1.2.4">
+                    <p id="section-toc.1-1.8.2.1.2.4.1"><a href="#section-8.1.4" class="xref">8.1.4</a>.  <a href="#name-request-reliability-mechani" class="xref">Request Reliability Mechanisms in HTTP/2</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-server-push" class="xref">Server Push</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.8.2.2.2.1">
+                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="xref">8.2.1</a>.  <a href="#name-push-requests" class="xref">Push Requests</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.8.2.2.2.2">
+                    <p id="section-toc.1-1.8.2.2.2.2.1"><a href="#section-8.2.2" class="xref">8.2.2</a>.  <a href="#name-push-responses" class="xref">Push Responses</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="xref">8.3</a>.  <a href="#name-the-connect-method" class="xref">The CONNECT Method</a></p>
+</li>
+            </ul>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-additional-http-requirement" class="xref">Additional HTTP Requirements/Considerations</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-connection-management" class="xref">Connection Management</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.1.2.1">
+                    <p id="section-toc.1-1.9.2.1.2.1.1"><a href="#section-9.1.1" class="xref">9.1.1</a>.  <a href="#name-connection-reuse" class="xref">Connection Reuse</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-use-of-tls-features" class="xref">Use of TLS Features</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2.2.1">
+                    <p id="section-toc.1-1.9.2.2.2.1.1"><a href="#section-9.2.1" class="xref">9.2.1</a>.  <a href="#name-tls-12-features" class="xref">TLS 1.2 Features</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2.2.2">
+                    <p id="section-toc.1-1.9.2.2.2.2.1"><a href="#section-9.2.2" class="xref">9.2.2</a>.  <a href="#name-tls-12-cipher-suites" class="xref">TLS 1.2 Cipher Suites</a></p>
+</li>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2.2.3">
+                    <p id="section-toc.1-1.9.2.2.2.3.1"><a href="#section-9.2.3" class="xref">9.2.3</a>.  <a href="#name-tls-13-features" class="xref">TLS 1.3 Features</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="xref">10.1</a>.  <a href="#name-server-authority" class="xref">Server Authority</a><a href="#section-toc.1-1.10.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="xref">10.1</a>.  <a href="#name-server-authority" class="xref">Server Authority</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-cross-protocol-attacks" class="xref">Cross-Protocol Attacks</a><a href="#section-toc.1-1.10.2.2.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-cross-protocol-attacks" class="xref">Cross-Protocol Attacks</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-intermediary-encapsulation-" class="xref">Intermediary Encapsulation Attacks</a><a href="#section-toc.1-1.10.2.3.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.3">
+                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-intermediary-encapsulation-" class="xref">Intermediary Encapsulation Attacks</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.4">
-                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="xref">10.4</a>.  <a href="#name-cacheability-of-pushed-resp" class="xref">Cacheability of Pushed Responses</a><a href="#section-toc.1-1.10.2.4.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.4">
+                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="xref">10.4</a>.  <a href="#name-cacheability-of-pushed-resp" class="xref">Cacheability of Pushed Responses</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.5">
-                <p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5" class="xref">10.5</a>.  <a href="#name-denial-of-service-considera" class="xref">Denial-of-Service Considerations</a><a href="#section-toc.1-1.10.2.5.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.10.2.5.2.1">
-                    <p id="section-toc.1-1.10.2.5.2.1.1"><a href="#section-10.5.1" class="xref">10.5.1</a>.  <a href="#name-limits-on-field-block-size" class="xref">Limits on Field Block Size</a><a href="#section-toc.1-1.10.2.5.2.1.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.5">
+                <p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5" class="xref">10.5</a>.  <a href="#name-denial-of-service-considera" class="xref">Denial-of-Service Considerations</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.10.2.5.2.1">
+                    <p id="section-toc.1-1.10.2.5.2.1.1"><a href="#section-10.5.1" class="xref">10.5.1</a>.  <a href="#name-limits-on-field-block-size" class="xref">Limits on Field Block Size</a></p>
 </li>
-                  <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.5.2.2">
-                    <p id="section-toc.1-1.10.2.5.2.2.1"><a href="#section-10.5.2" class="xref">10.5.2</a>.  <a href="#name-connect-issues" class="xref">CONNECT Issues</a><a href="#section-toc.1-1.10.2.5.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.10.2.5.2.2">
+                    <p id="section-toc.1-1.10.2.5.2.2.1"><a href="#section-10.5.2" class="xref">10.5.2</a>.  <a href="#name-connect-issues" class="xref">CONNECT Issues</a></p>
 </li>
                 </ul>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.6">
-                <p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6" class="xref">10.6</a>.  <a href="#name-use-of-compression" class="xref">Use of Compression</a><a href="#section-toc.1-1.10.2.6.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.6">
+                <p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6" class="xref">10.6</a>.  <a href="#name-use-of-compression" class="xref">Use of Compression</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.7">
-                <p id="section-toc.1-1.10.2.7.1"><a href="#section-10.7" class="xref">10.7</a>.  <a href="#name-use-of-padding" class="xref">Use of Padding</a><a href="#section-toc.1-1.10.2.7.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.7">
+                <p id="section-toc.1-1.10.2.7.1"><a href="#section-10.7" class="xref">10.7</a>.  <a href="#name-use-of-padding" class="xref">Use of Padding</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.8">
-                <p id="section-toc.1-1.10.2.8.1"><a href="#section-10.8" class="xref">10.8</a>.  <a href="#name-privacy-considerations" class="xref">Privacy Considerations</a><a href="#section-toc.1-1.10.2.8.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-</li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="xref">11.1</a>.  <a href="#name-registration-of-http-2-iden" class="xref">Registration of HTTP/2 Identification Strings</a><a href="#section-toc.1-1.11.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.11.2.2">
-                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="xref">11.2</a>.  <a href="#name-frame-type-registry" class="xref">Frame Type Registry</a><a href="#section-toc.1-1.11.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.11.2.3">
-                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="xref">11.3</a>.  <a href="#name-settings-registry" class="xref">Settings Registry</a><a href="#section-toc.1-1.11.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.11.2.4">
-                <p id="section-toc.1-1.11.2.4.1"><a href="#section-11.4" class="xref">11.4</a>.  <a href="#name-error-code-registry" class="xref">Error Code Registry</a><a href="#section-toc.1-1.11.2.4.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.11.2.5">
-                <p id="section-toc.1-1.11.2.5.1"><a href="#section-11.5" class="xref">11.5</a>.  <a href="#name-http2-settings-header-field" class="xref">HTTP2-Settings Header Field Registration</a><a href="#section-toc.1-1.11.2.5.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.11.2.6">
-                <p id="section-toc.1-1.11.2.6.1"><a href="#section-11.6" class="xref">11.6</a>.  <a href="#name-pri-method-registration" class="xref">PRI Method Registration</a><a href="#section-toc.1-1.11.2.6.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.11.2.7">
-                <p id="section-toc.1-1.11.2.7.1"><a href="#section-11.7" class="xref">11.7</a>.  <a href="#name-the-h2c-upgrade-token" class="xref">The h2c Upgrade Token</a><a href="#section-toc.1-1.11.2.7.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.10.2.8">
+                <p id="section-toc.1-1.10.2.8.1"><a href="#section-10.8" class="xref">10.8</a>.  <a href="#name-privacy-considerations" class="xref">Privacy Considerations</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-12" class="xref">12</a>. <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="xref">12.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.12.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="xref">11.1</a>.  <a href="#name-registration-of-http-2-iden" class="xref">Registration of HTTP/2 Identification Strings</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="xref">12.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.12.2.2.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="xref">11.2</a>.  <a href="#name-frame-type-registry" class="xref">Frame Type Registry</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.11.2.3">
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="xref">11.3</a>.  <a href="#name-settings-registry" class="xref">Settings Registry</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.11.2.4">
+                <p id="section-toc.1-1.11.2.4.1"><a href="#section-11.4" class="xref">11.4</a>.  <a href="#name-error-code-registry" class="xref">Error Code Registry</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.11.2.5">
+                <p id="section-toc.1-1.11.2.5.1"><a href="#section-11.5" class="xref">11.5</a>.  <a href="#name-http2-settings-header-field" class="xref">HTTP2-Settings Header Field Registration</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.11.2.6">
+                <p id="section-toc.1-1.11.2.6.1"><a href="#section-11.6" class="xref">11.6</a>.  <a href="#name-pri-method-registration" class="xref">PRI Method Registration</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.11.2.7">
+                <p id="section-toc.1-1.11.2.7.1"><a href="#section-11.7" class="xref">11.7</a>.  <a href="#name-the-h2c-upgrade-token" class="xref">The h2c Upgrade Token</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-prohibited-tls-12-cipher-su" class="xref">Prohibited TLS 1.2 Cipher Suites</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="xref">12</a>. <a href="#name-references" class="xref">References</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="xref">12.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-changes-from-rfc-7540" class="xref">Changes from RFC 7540</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.12.2.2">
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="xref">12.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.15.1" class="pilcrow">¶</a></p>
+            </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.16.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-prohibited-tls-12-cipher-su" class="xref">Prohibited TLS 1.2 Cipher Suites</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.17">
-            <p id="section-toc.1-1.17.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.17.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-changes-from-rfc-7540" class="xref">Changes from RFC 7540</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.17">
+            <p id="section-toc.1-1.17.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1326,6 +1320,8 @@ address div.right {
 <p id="section-1-6">
         Finally, HTTP/2 also enables more efficient processing of messages through use of binary
         message framing.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">
+        This document obsoletes <span><a href="#RFC7540" class="xref">RFC 7540</a> [<a href="#RFC7540" class="xref">RFC7540</a>]</span> and <span><a href="#RFC8740" class="xref">RFC 8740</a> [<a href="#RFC8740" class="xref">RFC8740</a>]</span>.<a href="#section-1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Overview">
@@ -1354,17 +1350,17 @@ address div.right {
         can be used by a receiver is transmitted.  <span><a href="#StreamPriority" class="xref">Prioritization</a> (<a href="#StreamPriority" class="xref">Section 5.3</a>)</span> ensures that limited resources can be directed
         to the most important streams first.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">
-        HTTP/2 adds a new interaction mode whereby a server can <span><a href="#PushResources" class="xref">push
-        responses to a client</a> (<a href="#PushResources" class="xref">Section 8.2</a>)</span>.  Server push allows a server to speculatively send data to a
-        client that the server anticipates the client will need, trading off some network usage
-        against a potential latency gain.  The server does this by synthesizing a request, which it
-        sends as a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame.  The server is then able to send a response to
-        the synthetic request on a separate stream.<a href="#section-2-5" class="pilcrow">¶</a></p>
-<p id="section-2-6">
         Because HTTP header fields used in a connection can contain large amounts of redundant
         data, frames that contain them are <span><a href="#FieldBlock" class="xref">compressed</a> (<a href="#FieldBlock" class="xref">Section 4.3</a>)</span>. This has
         especially advantageous impact upon request sizes in the common case, allowing many
-        requests to be compressed into one packet.<a href="#section-2-6" class="pilcrow">¶</a></p>
+        requests to be compressed into one packet.<a href="#section-2-5" class="pilcrow">¶</a></p>
+<p id="section-2-6">
+        Finally, HTTP/2 adds a new, optional interaction mode whereby a server can <span><a href="#PushResources" class="xref">push
+        responses to a client</a> (<a href="#PushResources" class="xref">Section 8.2</a>)</span>.  This is intended to allow a server to speculatively send data to a
+        client that the server anticipates the client will need, trading off some network usage
+        against a potential latency gain.  The server does this by synthesizing a request, which it
+        sends as a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame.  The server is then able to send a response to
+        the synthetic request on a separate stream.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <section id="section-2.1">
         <h3 id="name-document-organization">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-document-organization" class="section-name selfRef">Document Organization</a>
@@ -1473,10 +1469,10 @@ address div.right {
 </dl>
 <p id="section-2.2-5">
           Finally, the terms "gateway", "intermediary", "proxy", and "tunnel" are defined in
-          <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-3.7" class="relref">Section 3.7</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.  Intermediaries act as both client
+          <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-3.7" class="relref">Section 3.7</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.  Intermediaries act as both client
           and server at different times.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
 <p id="section-2.2-6">
-          The term "content" as it applies to message bodies is defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.4" class="relref">Section 6.4</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-2.2-6" class="pilcrow">¶</a></p>
+          The term "content" as it applies to message bodies is defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.4" class="relref">Section 6.4</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-2.2-6" class="pilcrow">¶</a></p>
 </section>
 </section>
 </div>
@@ -1489,7 +1485,7 @@ address div.right {
         An HTTP/2 connection is an application-layer protocol running on top of a TCP connection
         (<span>[<a href="#TCP" class="xref">TCP</a>]</span>). The client is the TCP connection initiator.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">
-        HTTP/2 uses the "http" and "https" URI schemes defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-4.2" class="relref">Section 4.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>. HTTP/2 shares the same
+        HTTP/2 uses the "http" and "https" URI schemes defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-4.2" class="relref">Section 4.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>. HTTP/2 shares the same
         default port numbers: 80 for "http" URIs and 443 for "https" URIs.  As a result,
         implementations processing requests for target resource URIs like <code>http://example.org/foo</code> or <code>https://example.com/bar</code> are required to first discover whether the
         upstream server (the immediate peer to which the client wishes to establish a connection)
@@ -1524,7 +1520,7 @@ address div.right {
                 protocol that does not use TLS.<a href="#section-3.1-2.2.2" class="pilcrow">¶</a></p>
 <p id="section-3.1-2.2.3">
                 The "h2c" string was previously used as a token for use in the HTTP Upgrade mechanism's
-                Upgrade header field (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-7.8" class="relref">Section 7.8</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>). This usage was never widely
+                Upgrade header field (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-7.8" class="relref">Section 7.8</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>). This usage was never widely
                 deployed, and is no longer specified in this document.<a href="#section-3.1-2.2.3" class="pilcrow">¶</a></p>
 </li>
         </ul>
@@ -1614,9 +1610,9 @@ address div.right {
           To avoid unnecessary latency, clients are permitted to send additional frames to the
           server immediately after sending the client connection preface, without waiting to receive
           the server connection preface.  It is important to note, however, that the server
-          connection preface <a href="#SETTINGS" class="xref">SETTINGS</a> frame might include parameters that necessarily
+          connection preface <a href="#SETTINGS" class="xref">SETTINGS</a> frame might include settings that necessarily
           alter how a client is expected to communicate with the server. Upon receiving the
-          <a href="#SETTINGS" class="xref">SETTINGS</a> frame, the client is expected to honor any parameters established.
+          <a href="#SETTINGS" class="xref">SETTINGS</a> frame, the client is expected to honor any settings established.
           In some configurations, it is possible for the server to transmit <a href="#SETTINGS" class="xref">SETTINGS</a>
           before the client sends additional frames, providing an opportunity to avoid this issue.<a href="#section-3.4-8" class="pilcrow">¶</a></p>
 <p id="section-3.4-9">
@@ -2004,10 +2000,7 @@ address div.right {
 </li>
             </ul>
 <p id="section-5.1-6.6.4">
-                An endpoint MAY send a <a href="#PRIORITY" class="xref">PRIORITY</a> frame in this state to reprioritize
-                the reserved stream.  An endpoint MUST NOT send any type of frame other than
-                <a href="#RST_STREAM" class="xref">RST_STREAM</a>, <a href="#WINDOW_UPDATE" class="xref">WINDOW_UPDATE</a>, or <a href="#PRIORITY" class="xref">PRIORITY</a>
-                in this state.<a href="#section-5.1-6.6.4" class="pilcrow">¶</a></p>
+                An endpoint MUST NOT send any type of frame other than <a href="#RST_STREAM" class="xref">RST_STREAM</a>, <a href="#WINDOW_UPDATE" class="xref">WINDOW_UPDATE</a>, or <a href="#PRIORITY" class="xref">PRIORITY</a> in this state.<a href="#section-5.1-6.6.4" class="pilcrow">¶</a></p>
 <p id="section-5.1-6.6.5">
                 Receiving any type of frame other than <a href="#HEADERS" class="xref">HEADERS</a>,
                 <a href="#RST_STREAM" class="xref">RST_STREAM</a>, or <a href="#PRIORITY" class="xref">PRIORITY</a> on a stream in this state MUST
@@ -2050,8 +2043,7 @@ address div.right {
                 flow-controlled frames.  In this state, a receiver can ignore <a href="#WINDOW_UPDATE" class="xref">WINDOW_UPDATE</a> frames,
                 which might arrive for a short period after a frame bearing the
                 END_STREAM flag is sent.<a href="#section-5.1-6.10.3" class="pilcrow">¶</a></p>
-<p id="section-5.1-6.10.4"><a href="#PRIORITY" class="xref">PRIORITY</a> frames received in this state are used to reprioritize
-                streams that depend on the identified stream.<a href="#section-5.1-6.10.4" class="pilcrow">¶</a></p>
+<p id="section-5.1-6.10.4"><a href="#PRIORITY" class="xref">PRIORITY</a> frames can be received in this state.<a href="#section-5.1-6.10.4" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-5.1-6.11">half-closed (remote):</dt>
@@ -2095,10 +2087,7 @@ address div.right {
                 state, though endpoints MAY choose to treat frames that arrive a significant time
                 after sending END_STREAM as a <span><a href="#ConnectionErrorHandler" class="xref">connection
                 error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-5.1-6.14.3" class="pilcrow">¶</a></p>
-<p id="section-5.1-6.14.4"><a href="#PRIORITY" class="xref">PRIORITY</a> frames can be sent on closed streams to prioritize streams
-                that are dependent on the closed stream.  Endpoints SHOULD process
-                <a href="#PRIORITY" class="xref">PRIORITY</a> frames, though they can be ignored if the stream has been
-                removed from the dependency tree (see <a href="#priority-gc" class="xref">Section 5.3.4</a>).<a href="#section-5.1-6.14.4" class="pilcrow">¶</a></p>
+<p id="section-5.1-6.14.4"><a href="#PRIORITY" class="xref">PRIORITY</a> frames can be sent on closed streams.<a href="#section-5.1-6.14.4" class="pilcrow">¶</a></p>
 <p id="section-5.1-6.14.5">
                 If this state is reached as a result of sending a <a href="#RST_STREAM" class="xref">RST_STREAM</a> frame,
                 the peer that receives the <a href="#RST_STREAM" class="xref">RST_STREAM</a> might have already sent -- or
@@ -2257,10 +2246,10 @@ address div.right {
 </li>
           </ol>
 <p id="section-5.2.1-3">
-            Implementations are also responsible for managing how requests and responses are sent
-            based on priority, choosing how to avoid head-of-line blocking for requests, and
-            managing the creation of new streams.  Algorithm choices for these could interact with
-            any flow-control algorithm.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
+            Implementations are also responsible for prioritizing the sending of requests and
+            responses, choosing how to avoid head-of-line blocking for requests, and managing the
+            creation of new streams.  Algorithm choices for these could interact with any
+            flow-control algorithm.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="DisableFlowControl">
@@ -2296,227 +2285,68 @@ address div.right {
 </div>
 <div id="StreamPriority">
 <section id="section-5.3">
-        <h3 id="name-stream-priority">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-stream-priority" class="section-name selfRef">Stream Priority</a>
+        <h3 id="name-prioritization">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-prioritization" class="section-name selfRef">Prioritization</a>
         </h3>
 <p id="section-5.3-1">
-          A client can assign a priority for a new stream by including prioritization information in
-          the <span><a href="#HEADERS" class="xref">HEADERS frame</a> (<a href="#HEADERS" class="xref">Section 6.2</a>)</span> that opens the stream.  At any other time,
-          the <span><a href="#PRIORITY" class="xref">PRIORITY frame</a> (<a href="#PRIORITY" class="xref">Section 6.3</a>)</span> can be used to change the priority of a
-          stream.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+          In a multiplexed protocol like HTTP/2, prioritizing allocation of bandwidth and
+          computation resources to streams can be critical to attaining good performance.  A poor
+          prioritization scheme can result in HTTP/2 providing poor performance.  With no parallelism
+          at the TCP layer, performance could be significantly worse than HTTP/1.1.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">
-          The purpose of prioritization is to allow an endpoint to express how it would prefer its
-          peer to allocate resources when managing concurrent streams.  Most importantly, priority can
-          be used to select streams for transmitting frames when there is limited capacity for
-          sending.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">
-          Streams can be prioritized by marking them as dependent on the completion of other streams
-          (<a href="#pri-depend" class="xref">Section 5.3.1</a>).  Each dependency is assigned a relative weight, a number
-          that is used to determine the relative proportion of available resources that are assigned
-          to streams dependent on the same stream.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4">
-          Explicitly setting the priority for a stream is input to a prioritization process.  It
-          does not guarantee any particular processing or transmission order for the stream relative
-          to any other stream.  An endpoint cannot force a peer to process concurrent streams in a
-          particular order using priority.  Expressing priority is therefore only a suggestion.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
-<p id="section-5.3-5">
-          Prioritization information can be omitted from messages.  Defaults are used prior to any
-          explicit values being provided (<a href="#pri-default" class="xref">Section 5.3.5</a>).<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">
-          The information that an endpoint maintains for stream priority is separate from other
-          state. Importantly, this includes <span><a href="#StreamStates" class="xref">stream states</a> (<a href="#StreamStates" class="xref">Section 5.1</a>)</span>. A
-          stream in any state can have its priority changed with a PRIORITY frame. The state of a
-          stream is not changed as a result of changing its priority. The number of streams for
-          which state is remembered is at the discretion of an endpoint, see
-          <a href="#priority-gc" class="xref">Section 5.3.4</a> for details.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
-<div id="pri-depend">
+          A good prioritization scheme benefits from the application of contextual knowledge such as
+          the content of resources, how resources are interrelated, and how those resources will be
+          used by a peer.  In particular, clients can possess knowledge about the priority of
+          requests that is relevant to server prioritization.  In those cases, having clients
+          provide priority information can improve performance.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<div id="PriorityHistory">
 <section id="section-5.3.1">
-          <h4 id="name-stream-dependencies">
-<a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-stream-dependencies" class="section-name selfRef">Stream Dependencies</a>
+          <h4 id="name-background-of-priority-in-h">
+<a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-background-of-priority-in-h" class="section-name selfRef">Background of Priority in HTTP/2</a>
           </h4>
 <p id="section-5.3.1-1">
-            Each stream can be given an explicit dependency on another stream.  Including a
-            dependency expresses a preference to allocate resources to the identified stream rather
-            than to the dependent stream.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
+            HTTP/2 included a rich system for signaling priority of requests.  However, this system
+            proved to be complex and it was not uniformly implemented.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.1-2">
-            A stream that is not dependent on any other stream is given a stream dependency of 0x0.
-            In other words, the non-existent stream 0 forms the root of the tree.<a href="#section-5.3.1-2" class="pilcrow">¶</a></p>
+            The flexible scheme meant that it was possible for clients to express priorities in very
+            different ways, with little consistency in the approaches that were adopted.  For
+            servers, implementing generic support for the scheme was complex.  Implementation of
+            priorities was uneven in both clients and servers.  Many server deployments ignored
+            client signals when prioritizing their handling of requests.<a href="#section-5.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.3.1-3">
-            A stream that depends on another stream is a dependent stream. The stream upon which a
-            stream is dependent is a parent stream. A dependency on a stream that is not currently
-            in the tree -- such as a stream in the "idle" state -- results in that stream being given
-            a <span><a href="#pri-default" class="xref">default priority</a> (<a href="#pri-default" class="xref">Section 5.3.5</a>)</span>.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.1-4">
-            When assigning a dependency on another stream, the stream is added as a new dependency
-            of the parent stream.  Dependent streams that share the same parent are not ordered with
-            respect to each other.  For example, if streams B and C are dependent on stream A, and
-            if stream D is created with a dependency on stream A, this results in a dependency order
-            of A followed by B, C, and D in any order.<a href="#section-5.3.1-4" class="pilcrow">¶</a></p>
-<span id="name-example-of-default-dependen"></span><div id="ExampleofDefaultDependencyCreation">
-<figure id="figure-3">
-            <div class="artwork art-text alignLeft art-inline" id="section-5.3.1-5.1">
-<pre>
-    A                 A
-   / \      ==&gt;      /|\
-  B   C             B D C
-</pre>
-</div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-of-default-dependen" class="selfRef">Example of Default Dependency Creation</a>
-            </figcaption></figure>
-</div>
-<p id="section-5.3.1-6">
-            An exclusive flag allows for the insertion of a new level of dependencies.  The
-            exclusive flag causes the stream to become the sole dependency of its parent stream,
-            causing other dependencies to become dependent on the exclusive stream.  In the
-            previous example, if stream D is created with an exclusive dependency on stream A, this
-            results in D becoming the dependency parent of B and C.<a href="#section-5.3.1-6" class="pilcrow">¶</a></p>
-<span id="name-example-of-exclusive-depend"></span><div id="ExampleofExclusiveDependencyCreation">
-<figure id="figure-4">
-            <div class="artwork art-text alignLeft art-inline" id="section-5.3.1-7.1">
-<pre>
-                      A
-    A                 |
-   / \      ==&gt;       D
-  B   C              / \
-                    B   C
-</pre>
-</div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-example-of-exclusive-depend" class="selfRef">Example of Exclusive Dependency Creation</a>
-            </figcaption></figure>
-</div>
-<p id="section-5.3.1-8">
-            Inside the dependency tree, a dependent stream SHOULD only be allocated resources if
-            either all of the streams that it depends on (the chain of parent streams up to 0x0)
-            are closed or it is not possible to make progress on them.<a href="#section-5.3.1-8" class="pilcrow">¶</a></p>
-<p id="section-5.3.1-9">
-            A stream cannot depend on itself.  An endpoint MUST treat this as a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-5.3.1-9" class="pilcrow">¶</a></p>
+            In short, the prioritization signaling in <span><a href="#RFC7540" class="xref">RFC7540</a> [<a href="#RFC7540" class="xref">RFC7540</a>]</span> was not
+            successful.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="PriorityHere">
 <section id="section-5.3.2">
-          <h4 id="name-dependency-weighting">
-<a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-dependency-weighting" class="section-name selfRef">Dependency Weighting</a>
+          <h4 id="name-priority-signaling-in-this-">
+<a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-priority-signaling-in-this-" class="section-name selfRef">Priority Signaling in this Document</a>
           </h4>
 <p id="section-5.3.2-1">
-            All dependent streams are allocated an integer weight between 1 and 256 (inclusive).<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
+            This update to HTTP/2 deprecates the priority signaling defined in <span><a href="#RFC7540" class="xref">RFC 7540</a> [<a href="#RFC7540" class="xref">RFC7540</a>]</span>.  The bulk of the text related to priority signals is
+            not included in this document.  The description of frame fields and some of the
+            mandatory handling is retained to ensure that implementations of this document remain
+            interoperable with implementations that use the priority signaling described in RFC
+            7540.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.2-2">
-            Streams with the same parent SHOULD be allocated resources proportionally based on their
-            weight.  Thus, if stream B depends on stream A with weight 4, stream C depends on stream A
-            with weight 12, and no progress can be made on stream A, stream B ideally receives one-third
-            of the resources allocated to stream C.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
-</section>
-<div id="reprioritize">
-<section id="section-5.3.3">
-          <h4 id="name-reprioritization">
-<a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-reprioritization" class="section-name selfRef">Reprioritization</a>
-          </h4>
-<p id="section-5.3.3-1">
-            Stream priorities are changed using the <a href="#PRIORITY" class="xref">PRIORITY</a> frame.  Setting a
-            dependency causes a stream to become dependent on the identified parent stream.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.3-2">
-            Dependent streams move with their parent stream if the parent is reprioritized.  Setting
-            a dependency with the exclusive flag for a reprioritized stream causes all the
-            dependencies of the new parent stream to become dependent on the reprioritized stream.<a href="#section-5.3.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3.3-3">
-            If a stream is made dependent on one of its own dependencies, the formerly dependent
-            stream is first moved to be dependent on the reprioritized stream's previous parent.
-            The moved dependency retains its weight.<a href="#section-5.3.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.3-4" class="keepWithNext">
-              For example, consider an original dependency tree where B and C depend on A, D and E
-              depend on C, and F depends on D.  If A is made dependent on D, then D takes the place
-              of A.  All other dependency relationships stay the same, except for F, which becomes
-              dependent on A if the reprioritization is exclusive.<a href="#section-5.3.3-4" class="pilcrow">¶</a></p>
-<span id="name-example-of-dependency-reord"></span><div id="ExampleofDependencyReordering">
-<figure id="figure-5">
-            <div class="artwork art-text alignLeft art-inline" id="section-5.3.3-5.1">
-<pre>
-    x                x                x                 x
-    |               / \               |                 |
-    A              D   A              D                 D
-   / \            /   / \            / \                |
-  B   C     ==&gt;  F   B   C   ==&gt;    F   A       OR      A
-     / \                 |             / \             /|\
-    D   E                E            B   C           B C F
-    |                                     |             |
-    F                                     E             E
-               (intermediate)   (non-exclusive)    (exclusive)
-</pre>
-</div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-of-dependency-reord" class="selfRef">Example of Dependency Reordering</a>
-            </figcaption></figure>
-</div>
-</section>
-</div>
-<div id="priority-gc">
-<section id="section-5.3.4">
-          <h4 id="name-prioritization-state-manage">
-<a href="#section-5.3.4" class="section-number selfRef">5.3.4. </a><a href="#name-prioritization-state-manage" class="section-name selfRef">Prioritization State Management</a>
-          </h4>
-<p id="section-5.3.4-1">
-            When a stream is removed from the dependency tree, its dependencies can be moved to
-            become dependent on the parent of the closed stream.  The weights of new dependencies
-            are recalculated by distributing the weight of the dependency of the closed stream
-            proportionally based on the weights of its dependencies.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-2">
-            Streams that are removed from the dependency tree cause some prioritization information
-            to be lost.  Resources are shared between streams with the same parent stream, which
-            means that if a stream in that set closes or becomes blocked, any spare capacity
-            allocated to a stream is distributed to the immediate neighbors of the stream.  However,
-            if the common dependency is removed from the tree, those streams share resources with
-            streams at the next highest level.<a href="#section-5.3.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-3">
-            For example, assume streams A and B share a parent, and streams C and D both depend on
-            stream A. Prior to the removal of stream A, if streams A and D are unable to proceed,
-            then stream C receives all the resources dedicated to stream A.  If stream A is removed
-            from the tree, the weight of stream A is divided between streams C and D.  If stream D
-            is still unable to proceed, this results in stream C receiving a reduced proportion of
-            resources.  For equal starting weights, C receives one third, rather than one half, of
-            available resources.<a href="#section-5.3.4-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-4">
-            It is possible for a stream to become closed while prioritization information that
-            creates a dependency on that stream is in transit.  If a stream identified in a
-            dependency has no associated priority information, then the dependent stream is instead
-            assigned a <span><a href="#pri-default" class="xref">default priority</a> (<a href="#pri-default" class="xref">Section 5.3.5</a>)</span>.  This potentially creates
-            suboptimal prioritization, since the stream could be given a priority that is different
-            from what is intended.<a href="#section-5.3.4-4" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-5">
-            To avoid these problems, an endpoint SHOULD retain stream prioritization state for a
-            period after streams become closed.  The longer state is retained, the lower the chance
-            that streams are assigned incorrect or default priority values.<a href="#section-5.3.4-5" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-6">
-            Similarly, streams that are in the "idle" state can be assigned priority or become a
-            parent of other streams.  This allows for the creation of a grouping node in the
-            dependency tree, which enables more flexible expressions of priority.  Idle streams
-            begin with a <span><a href="#pri-default" class="xref">default priority</a> (<a href="#pri-default" class="xref">Section 5.3.5</a>)</span>.<a href="#section-5.3.4-6" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-7">
-            The retention of priority information for streams that are not counted toward the limit
-            set by <a href="#SETTINGS_MAX_CONCURRENT_STREAMS" class="xref">SETTINGS_MAX_CONCURRENT_STREAMS</a> could create a large state burden
-            for an endpoint.  Therefore, the amount of prioritization state that is retained MAY be
-            limited.<a href="#section-5.3.4-7" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-8">
-            The amount of additional state an endpoint maintains for prioritization could be
-            dependent on load; under high load, prioritization state can be discarded to limit
-            resource commitments.  In extreme cases, an endpoint could even discard prioritization
-            state for active or reserved streams. If a limit is applied, endpoints SHOULD maintain
-            state for at least as many streams as allowed by their setting for
-            <a href="#SETTINGS_MAX_CONCURRENT_STREAMS" class="xref">SETTINGS_MAX_CONCURRENT_STREAMS</a>.  Implementations SHOULD also attempt to
-            retain state for streams that are in active use in the priority tree.<a href="#section-5.3.4-8" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-9">
-            If it has retained enough state to do so, an endpoint receiving a
-            <a href="#PRIORITY" class="xref">PRIORITY</a> frame that changes the priority of a
-            closed stream SHOULD alter the dependencies of the streams that depend on it.<a href="#section-5.3.4-9" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="pri-default">
-<section id="section-5.3.5">
-          <h4 id="name-default-priorities">
-<a href="#section-5.3.5" class="section-number selfRef">5.3.5. </a><a href="#name-default-priorities" class="section-name selfRef">Default Priorities</a>
-          </h4>
-<p id="section-5.3.5-1">
-            All streams are initially assigned a non-exclusive dependency on stream 0x0.  <span><a href="#PushResources" class="xref">Pushed streams</a> (<a href="#PushResources" class="xref">Section 8.2</a>)</span> initially depend on their associated
-            stream.  In both cases, streams are assigned a default weight of 16.<a href="#section-5.3.5-1" class="pilcrow">¶</a></p>
+            A thorough description of the RFC 7540 priority scheme remains in <span><a href="https://rfc-editor.org/rfc/rfc7540#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC7540" class="xref">RFC7540</a>]</span>.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-3">
+            Signaling priority information is necessary to attain good performance in many cases.
+            Where signaling priority information is important, endpoints are encouraged to use an
+            alternative scheme, such as <span>[<a href="#I-D.ietf-httpbis-priority" class="xref">I-D.ietf-httpbis-priority</a>]</span>.<a href="#section-5.3.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-4">
+            Though the priority signaling from RFC 7540 was not widely adopted, the information it
+            provides can still be useful in the absence of better information.  Endpoints that
+            receive priority signals in <a href="#HEADERS" class="xref">HEADERS</a> or <a href="#PRIORITY" class="xref">PRIORITY</a> frames can benefit from applying that
+            information.  In particular, implementations that consume these signals would not
+            benefit from discarding these priority signals in the absence of alternatives.<a href="#section-5.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.3.2-5">
+            Servers SHOULD use other contextual information in determining priority of requests in
+            the absence of any priority signals.  Servers MAY interpret the complete absence of
+            signals as an indication that the client has not implemented the feature.  The defaults
+            described in <span><a href="https://rfc-editor.org/rfc/rfc7540#section-5.3.5" class="relref">Section 5.3.5</a> of [<a href="#RFC7540" class="xref">RFC7540</a>]</span> are known to have poor performance
+            under most conditions and their use is unlikely to be deliberate.<a href="#section-5.3.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2628,7 +2458,7 @@ address div.right {
 <p id="section-5.5-2">
           This applies to the protocol elements defined in this document.  This does not affect the
           existing options for extending HTTP, such as defining new methods, status codes, or fields
-          (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-16" class="relref">Section 16</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-5.5-2" class="pilcrow">¶</a></p>
+          (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-16" class="relref">Section 16</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.5-3">
           Extensions are permitted to use new <span><a href="#FrameHeader" class="xref">frame types</a> (<a href="#FrameHeader" class="xref">Section 4.1</a>)</span>, new
           <span><a href="#SettingValues" class="xref">settings</a> (<a href="#SettingValues" class="xref">Section 6.5.2</a>)</span>, or new <span><a href="#ErrorCodes" class="xref">error
@@ -2692,7 +2522,7 @@ address div.right {
           DATA frames MAY also contain padding.  Padding can be added to DATA frames to obscure the
           size of messages.  Padding is a security feature; see <a href="#padding" class="xref">Section 10.7</a>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <span id="name-data-frame-payload"></span><div id="DATAFramePayload">
-<figure id="figure-6">
+<figure id="figure-3">
           <div class="artwork art-text alignLeft art-inline" id="section-6.1-3.1">
 <pre>
  +---------------+
@@ -2704,7 +2534,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-data-frame-payload" class="selfRef">DATA Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -2783,7 +2613,7 @@ address div.right {
           a header section or a trailer section. HEADERS frames can be sent on a stream
           in the "idle", "reserved (local)", "open", or "half-closed (remote)" state.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <span id="name-headers-frame-payload"></span><div id="HEADERSFramePayload">
-<figure id="figure-7">
+<figure id="figure-4">
           <div class="artwork art-text alignLeft art-inline" id="section-6.2-2.1">
 <pre>
  +---------------+
@@ -2799,7 +2629,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-headers-frame-payload" class="selfRef">HEADERS Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -2808,24 +2638,23 @@ address div.right {
 <span class="break"></span><dl class="dlParallel" id="section-6.2-4">
           <dt id="section-6.2-4.1">Pad Length:</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-4.2">
-              An 8-bit field containing the length of the frame padding in units of octets.  This
-              field is only present if the PADDED flag is set.<a href="#section-6.2-4.2" class="pilcrow">¶</a>
+            An 8-bit field containing the length of the frame padding in units of octets.  This
+            field is only present if the PADDED flag is set.<a href="#section-6.2-4.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.2-4.3">E:</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-4.4">
-              A single-bit flag indicating that the stream dependency is exclusive (see <a href="#StreamPriority" class="xref">Section 5.3</a>).  This field is only present if the PRIORITY flag is set.<a href="#section-6.2-4.4" class="pilcrow">¶</a>
+            A single-bit flag.  This field is only present if the PRIORITY flag is set.<a href="#section-6.2-4.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.2-4.5">Stream Dependency:</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-4.6">
-              A 31-bit stream identifier for the stream that this stream depends on (see <a href="#StreamPriority" class="xref">Section 5.3</a>).  This field is only present if the PRIORITY flag is set.<a href="#section-6.2-4.6" class="pilcrow">¶</a>
+            A 31-bit stream identifier.  This field is only present if the PRIORITY flag is set.<a href="#section-6.2-4.6" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.2-4.7">Weight:</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-4.8">
-              An unsigned 8-bit integer representing a priority weight for the stream (see <a href="#StreamPriority" class="xref">Section 5.3</a>).  Add one to the value to obtain a weight between 1 and 256.
-              This field is only present if the PRIORITY flag is set.<a href="#section-6.2-4.8" class="pilcrow">¶</a>
+            An unsigned 8-bit integer.  This field is only present if the PRIORITY flag is set.<a href="#section-6.2-4.8" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.2-4.9">Field Block Fragment:</dt>
@@ -2876,8 +2705,8 @@ address div.right {
 <dt id="section-6.2-6.7">PRIORITY (0x20):</dt>
           <dd style="margin-left: 1.5em" id="section-6.2-6.8">
             <p id="section-6.2-6.8.1">
-                When set, bit 5 indicates that the Exclusive Flag (E), Stream Dependency, and Weight
-                fields are present; see <a href="#StreamPriority" class="xref">Section 5.3</a>.<a href="#section-6.2-6.8.1" class="pilcrow">¶</a></p>
+              When set, bit 5 indicates that the Exclusive Flag (E), Stream Dependency, and Weight
+              fields are present.<a href="#section-6.2-6.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2894,14 +2723,8 @@ address div.right {
 <p id="section-6.2-10">
           The HEADERS frame can include padding.  Padding fields and flags are identical to those
           defined for <span><a href="#DATA" class="xref">DATA frames</a> (<a href="#DATA" class="xref">Section 6.1</a>)</span>.  Padding that exceeds the size
-          remaining for the header block fragment MUST be treated as a
+          remaining for the field block fragment MUST be treated as a
           <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.2-10" class="pilcrow">¶</a></p>
-<p id="section-6.2-11">
-          Prioritization information in a HEADERS frame is logically equivalent to a separate
-          <a href="#PRIORITY" class="xref">PRIORITY</a> frame, but inclusion in HEADERS avoids the potential for churn in
-          stream prioritization when new streams are created.  Prioritization fields in HEADERS
-          frames subsequent to the first on a stream <span><a href="#reprioritize" class="xref">reprioritize the
-          stream</a> (<a href="#reprioritize" class="xref">Section 5.3.3</a>)</span>.<a href="#section-6.2-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="PRIORITY">
@@ -2910,11 +2733,10 @@ address div.right {
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-priority" class="section-name selfRef">PRIORITY</a>
         </h3>
 <p id="section-6.3-1">
-          The PRIORITY frame (type=0x2) specifies the <span><a href="#StreamPriority" class="xref">sender-advised
-          priority of a stream</a> (<a href="#StreamPriority" class="xref">Section 5.3</a>)</span>.  It can be sent in any stream state, including idle or closed
-          streams.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+          The PRIORITY frame (type=0x2) is deprecated; see <a href="#PriorityHere" class="xref">Section 5.3.2</a>.  A
+          PRIORITY frame can be sent in any stream state, including idle or closed streams.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <span id="name-priority-frame-payload"></span><div id="PRIORITYFramePayload">
-<figure id="figure-8">
+<figure id="figure-5">
           <div class="artwork art-text alignLeft art-inline" id="section-6.3-2.1">
 <pre>
  +-+-------------------------------------------------------------+
@@ -2924,7 +2746,7 @@ address div.right {
  +-+-------------+
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-priority-frame-payload" class="selfRef">PRIORITY Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -2933,42 +2755,31 @@ address div.right {
 <span class="break"></span><dl class="dlParallel" id="section-6.3-4">
           <dt id="section-6.3-4.1">E:</dt>
           <dd style="margin-left: 1.5em" id="section-6.3-4.2">
-              A single-bit flag indicating that the stream dependency is exclusive (see <a href="#StreamPriority" class="xref">Section 5.3</a>).<a href="#section-6.3-4.2" class="pilcrow">¶</a>
+            A single-bit flag.<a href="#section-6.3-4.2" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.3-4.3">Stream Dependency:</dt>
           <dd style="margin-left: 1.5em" id="section-6.3-4.4">
-              A 31-bit stream identifier for the stream that this stream depends on (see <a href="#StreamPriority" class="xref">Section 5.3</a>).<a href="#section-6.3-4.4" class="pilcrow">¶</a>
+            A 31-bit stream identifier.<a href="#section-6.3-4.4" class="pilcrow">¶</a>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.3-4.5">Weight:</dt>
           <dd style="margin-left: 1.5em" id="section-6.3-4.6">
-              An unsigned 8-bit integer representing a priority weight for the stream (see <a href="#StreamPriority" class="xref">Section 5.3</a>).  Add one to the value to obtain a weight between 1 and 256.<a href="#section-6.3-4.6" class="pilcrow">¶</a>
+            An unsigned 8-bit integer.<a href="#section-6.3-4.6" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
 <p id="section-6.3-5">
           The PRIORITY frame does not define any flags.<a href="#section-6.3-5" class="pilcrow">¶</a></p>
 <p id="section-6.3-6">
-          The PRIORITY frame always identifies a stream. If a PRIORITY frame is received with a
-          stream identifier of 0x0, the recipient MUST respond with a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
-          <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.3-6" class="pilcrow">¶</a></p>
+          The PRIORITY frame always identifies a stream.  If a PRIORITY frame is received with a
+          stream identifier of 0x0, the recipient MUST respond with a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.3-6" class="pilcrow">¶</a></p>
 <p id="section-6.3-7">
-          Sending or receiving a PRIORITY frame does not affect the state of any stream
-          (<a href="#StreamStates" class="xref">Section 5.1</a>), only the priority of streams is altered.<a href="#section-6.3-7" class="pilcrow">¶</a></p>
+          Sending or receiving a PRIORITY frame does not affect the state of any stream (<a href="#StreamStates" class="xref">Section 5.1</a>).  The PRIORITY frame can be sent on a stream in any state,
+          including "idle" or "closed".  A PRIORITY frame cannot be sent between consecutive frames
+          that comprise a single <span><a href="#FieldBlock" class="xref">field block</a> (<a href="#FieldBlock" class="xref">Section 4.3</a>)</span>.<a href="#section-6.3-7" class="pilcrow">¶</a></p>
 <p id="section-6.3-8">
-          The PRIORITY frame can be sent on a stream in any state, though it cannot be sent between
-          consecutive frames that comprise a single <span><a href="#FieldBlock" class="xref">field block</a> (<a href="#FieldBlock" class="xref">Section 4.3</a>)</span>.
-          Note that this frame could arrive after processing or frame sending has completed, which
-          would cause it to have no effect on the identified stream.  For a stream that is in the
-          "half-closed (remote)" or "closed" state, this frame can only affect processing of the
-          identified stream and its dependent streams; it does not affect frame transmission on that stream.<a href="#section-6.3-8" class="pilcrow">¶</a></p>
-<p id="section-6.3-9">
-           The PRIORITY frame can be sent for a stream in the "idle" or "closed" state.  This
-           allows for the reprioritization of a group of dependent streams by altering the priority
-           of an unused or closed parent stream.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
-<p id="section-6.3-10">
-          A PRIORITY frame with a length other than 5 octets MUST be treated as a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#FRAME_SIZE_ERROR" class="xref">FRAME_SIZE_ERROR</a>.<a href="#section-6.3-10" class="pilcrow">¶</a></p>
+          A PRIORITY frame with a length other than 5 octets MUST be treated as a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#FRAME_SIZE_ERROR" class="xref">FRAME_SIZE_ERROR</a>.<a href="#section-6.3-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="RST_STREAM">
@@ -2981,7 +2792,7 @@ address div.right {
           is sent to request cancellation of a stream or to indicate that an error condition has
           occurred.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <span id="name-rst_stream-frame-payload"></span><div id="RST_STREAMFramePayload">
-<figure id="figure-9">
+<figure id="figure-6">
           <div class="artwork art-text alignLeft art-inline" id="section-6.4-2.1">
 <pre>
  +---------------------------------------------------------------+
@@ -2989,7 +2800,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
 <a href="#name-rst_stream-frame-payload" class="selfRef">RST_STREAM Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -3026,26 +2837,26 @@ address div.right {
 <p id="section-6.5-1">
           The SETTINGS frame (type=0x4) conveys configuration parameters that affect how endpoints
           communicate, such as preferences and constraints on peer behavior.  The SETTINGS frame is
-          also used to acknowledge the receipt of those parameters.  Individually, a SETTINGS
-          parameter can also be referred to as a "setting".<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+          also used to acknowledge the receipt of those settings.  Individually, a configuration
+          parameter from a SETTINGS frame is referred to as a "setting".<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.5-2">
-          SETTINGS parameters are not negotiated; they describe characteristics of the sending peer,
-          which are used by the receiving peer. Different values for the same parameter can be
+          Settings are not negotiated; they describe characteristics of the sending peer,
+          which are used by the receiving peer. Different values for the same setting can be
           advertised by each peer. For example, a client might set a high initial flow-control
           window, whereas a server might set a lower value to conserve resources.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
 <p id="section-6.5-3">
           A SETTINGS frame MUST be sent by both endpoints at the start of a connection and MAY be
           sent at any other time by either endpoint over the lifetime of the connection.
-          Implementations MUST support all of the parameters defined by this specification.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
+          Implementations MUST support all of the settings defined by this specification.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <p id="section-6.5-4">
           Each parameter in a SETTINGS frame replaces any existing value for that parameter.
-          Parameters are processed in the order in which they appear, and a receiver of a SETTINGS
-          frame does not need to maintain any state other than the current value of its
-          parameters. Therefore, the value of a SETTINGS parameter is the last value that is seen by
+          Settings are processed in the order in which they appear, and a receiver of a SETTINGS
+          frame does not need to maintain any state other than the current value of each setting.
+          Therefore, the value of a SETTINGS parameter is the last value that is seen by
           a receiver.<a href="#section-6.5-4" class="pilcrow">¶</a></p>
 <p id="section-6.5-5">
-          SETTINGS parameters are acknowledged by the receiving peer. To enable this, the SETTINGS
-          frame defines the following flag:<a href="#section-6.5-5" class="pilcrow">¶</a></p>
+          SETTINGS frames are acknowledged by the receiving peer. To enable this, the SETTINGS
+          frame defines the ACK flag:<a href="#section-6.5-5" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.5-6">
           <dt id="section-6.5-6.1">ACK (0x1):</dt>
           <dd style="margin-left: 1.5em" id="section-6.5-6.2">
@@ -3076,10 +2887,10 @@ address div.right {
 <a href="#section-6.5.1" class="section-number selfRef">6.5.1. </a><a href="#name-settings-format" class="section-name selfRef">SETTINGS Format</a>
           </h4>
 <p id="section-6.5.1-1">
-            The frame payload of a SETTINGS frame consists of zero or more parameters, each consisting of
+            The frame payload of a SETTINGS frame consists of zero or more settings, each consisting of
             an unsigned 16-bit setting identifier and an unsigned 32-bit value.<a href="#section-6.5.1-1" class="pilcrow">¶</a></p>
 <span id="name-setting-format"></span><div id="SettingFormatFigure">
-<figure id="figure-10">
+<figure id="figure-7">
             <div class="artwork art-text alignLeft art-inline" id="section-6.5.1-2.1">
 <pre>
  +-------------------------------+
@@ -3089,7 +2900,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-setting-format" class="selfRef">Setting Format</a>
             </figcaption></figure>
 </div>
@@ -3097,11 +2908,11 @@ address div.right {
 </div>
 <div id="SettingValues">
 <section id="section-6.5.2">
-          <h4 id="name-defined-settings-parameters">
-<a href="#section-6.5.2" class="section-number selfRef">6.5.2. </a><a href="#name-defined-settings-parameters" class="section-name selfRef">Defined SETTINGS Parameters</a>
+          <h4 id="name-defined-settings">
+<a href="#section-6.5.2" class="section-number selfRef">6.5.2. </a><a href="#name-defined-settings" class="section-name selfRef">Defined Settings</a>
           </h4>
 <p id="section-6.5.2-1">
-            The following parameters are defined:<a href="#section-6.5.2-1" class="pilcrow">¶</a></p>
+            The following settings are defined:<a href="#section-6.5.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.5.2-2">
             <dt id="section-6.5.2-2.1">
 <div id="SETTINGS_HEADER_TABLE_SIZE">SETTINGS_HEADER_TABLE_SIZE (0x1):</div>
@@ -3119,16 +2930,21 @@ address div.right {
             </dt>
 <dd style="margin-left: 1.5em" id="section-6.5.2-2.4">
               <p id="section-6.5.2-2.4.1">
-                  This setting can be used to disable <span><a href="#PushResources" class="xref">server
-                  push</a> (<a href="#PushResources" class="xref">Section 8.2</a>)</span>. An endpoint MUST NOT send a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame if it
-                  receives this parameter set to a value of 0. An endpoint that has both set this
-                  parameter to 0 and had it acknowledged MUST treat the receipt of a
-                  <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
-                  <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.5.2-2.4.1" class="pilcrow">¶</a></p>
+                This setting can be used to disable <span><a href="#PushResources" class="xref">server
+                push</a> (<a href="#PushResources" class="xref">Section 8.2</a>)</span>. A server MUST NOT send a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame if it receives this parameter set to a value
+                of 0. A client that has both set this parameter to 0 and had it acknowledged MUST
+                treat the receipt of a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a>
+                frame as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
+                <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.5.2-2.4.1" class="pilcrow">¶</a></p>
 <p id="section-6.5.2-2.4.2">
-                  The initial value is 1, which indicates that server push is permitted.  Any value
-                  other than 0 or 1 MUST be treated as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
-                  <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.5.2-2.4.2" class="pilcrow">¶</a></p>
+                The initial value of SETTINGS_ENABLE_PUSH is 1, which indicates that server push is
+                permitted.  Any value other than 0 or 1 MUST be treated as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.5.2-2.4.2" class="pilcrow">¶</a></p>
+<p id="section-6.5.2-2.4.3">
+                A server MUST NOT explicitly set this value to 1.  A server MAY choose to omit this
+                setting when it sends a SETTINGS frame, but if a server does include a value it MUST
+                be 0.  A client MUST treat receipt of a SETTINGS frame with SETTINGS_ENABLE_PUSH set
+                to 1 as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
+                <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-6.5.2-2.4.3" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-6.5.2-2.5">
@@ -3208,13 +3024,13 @@ address div.right {
             Most values in SETTINGS benefit from or require an understanding of when the peer has
             received and applied the changed parameter values. In order to provide
             such synchronization timepoints, the recipient of a SETTINGS frame in which the ACK flag
-            is not set MUST apply the updated parameters as soon as possible upon receipt.<a href="#section-6.5.3-1" class="pilcrow">¶</a></p>
+            is not set MUST apply the updated settings as soon as possible upon receipt.<a href="#section-6.5.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.5.3-2">
             The values in the SETTINGS frame MUST be processed in the order they appear, with no
-            other frame processing between values.  Unsupported parameters MUST be ignored.  Once
+            other frame processing between values.  Unsupported settings MUST be ignored.  Once
             all values have been processed, the recipient MUST immediately emit a SETTINGS frame
             with the ACK flag set. Upon receiving a SETTINGS frame with the ACK flag set, the sender
-            of the altered parameters can rely on the setting having been applied.<a href="#section-6.5.3-2" class="pilcrow">¶</a></p>
+            of the altered settings can rely on the value having been applied.<a href="#section-6.5.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.5.3-3">
             If the sender of a SETTINGS frame does not receive an acknowledgement within a
             reasonable amount of time, it MAY issue a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
@@ -3235,7 +3051,7 @@ address div.right {
           that provides additional context for the stream.  <a href="#PushResources" class="xref">Section 8.2</a> contains a
           thorough description of the use of PUSH_PROMISE frames.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <span id="name-push_promise-frame-payload"></span><div id="PUSH_PROMISEPayloadFormat">
-<figure id="figure-11">
+<figure id="figure-8">
           <div class="artwork art-text alignLeft art-inline" id="section-6.6-2.1">
 <pre>
  +---------------+
@@ -3249,7 +3065,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-push_promise-frame-payload" class="selfRef">PUSH_PROMISE Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -3361,7 +3177,7 @@ address div.right {
           sender, as well as determining whether an idle connection is still functional.  PING
           frames can be sent from any endpoint.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 <span id="name-ping-frame-payload"></span><div id="PINGPayloadFormat">
-<figure id="figure-12">
+<figure id="figure-9">
           <div class="artwork art-text alignLeft art-inline" id="section-6.7-2.1">
 <pre>
  +---------------------------------------------------------------+
@@ -3371,7 +3187,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-ping-frame-payload" class="selfRef">PING Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -3444,7 +3260,7 @@ address div.right {
           GOAWAY that has no more use for the connection SHOULD still send a GOAWAY frame before
           terminating the connection.<a href="#section-6.8-7" class="pilcrow">¶</a></p>
 <span id="name-goaway-frame-payload"></span><div id="GOAWAYPayloadFormat">
-<figure id="figure-13">
+<figure id="figure-10">
           <div class="artwork art-text alignLeft art-inline" id="section-6.8-8.1">
 <pre>
  +-+-------------------------------------------------------------+
@@ -3456,7 +3272,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-goaway-frame-payload" class="selfRef">GOAWAY Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -3552,7 +3368,7 @@ address div.right {
           a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> or <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
           <a href="#FLOW_CONTROL_ERROR" class="xref">FLOW_CONTROL_ERROR</a> if it is unable to accept a frame.<a href="#section-6.9-4" class="pilcrow">¶</a></p>
 <span id="name-window_update-frame-payload"></span><div id="WINDOW_UPDATEPayloadFormat">
-<figure id="figure-14">
+<figure id="figure-11">
           <div class="artwork art-text alignLeft art-inline" id="section-6.9-5.1">
 <pre>
  +-+-------------------------------------------------------------+
@@ -3560,7 +3376,7 @@ address div.right {
  +-+-------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-window_update-frame-payload" class="selfRef">WINDOW_UPDATE Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -3708,7 +3524,7 @@ address div.right {
           <a href="#HEADERS" class="xref">HEADERS</a>, <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a>, or CONTINUATION frame without the
           END_HEADERS flag set.<a href="#section-6.10-1" class="pilcrow">¶</a></p>
 <span id="name-continuation-frame-payload"></span><div id="CONTINUATIONFramePayload">
-<figure id="figure-15">
+<figure id="figure-12">
           <div class="artwork art-text alignLeft art-inline" id="section-6.10-2.1">
 <pre>
  +---------------------------------------------------------------+
@@ -3716,7 +3532,7 @@ address div.right {
  +---------------------------------------------------------------+
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-continuation-frame-payload" class="selfRef">CONTINUATION Frame Payload</a>
           </figcaption></figure>
 </div>
@@ -3887,7 +3703,7 @@ address div.right {
       </h2>
 <p id="section-8-1">
         HTTP/2 defines a framing of the HTTP message abstraction
-        (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6" class="relref">Section 6</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8-1" class="pilcrow">¶</a></p>
+        (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6" class="relref">Section 6</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8-1" class="pilcrow">¶</a></p>
 <div id="HttpSequence">
 <section id="section-8.1">
         <h3 id="name-http-message-framing">
@@ -3902,23 +3718,23 @@ address div.right {
           <li id="section-8.1-3.1">
               one <a href="#HEADERS" class="xref">HEADERS</a> frame (followed by zero or
               more <a href="#CONTINUATION" class="xref">CONTINUATION</a> frames) containing
-              the header section (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.3" class="relref">Section 6.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>),<a href="#section-8.1-3.1" class="pilcrow">¶</a>
+              the header section (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.3" class="relref">Section 6.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>),<a href="#section-8.1-3.1" class="pilcrow">¶</a>
 </li>
           <li id="section-8.1-3.2">
               zero or more <a href="#DATA" class="xref">DATA</a> frames containing the
-              message content (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.4" class="relref">Section 6.4</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>), and<a href="#section-8.1-3.2" class="pilcrow">¶</a>
+              message content (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.4" class="relref">Section 6.4</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>), and<a href="#section-8.1-3.2" class="pilcrow">¶</a>
 </li>
           <li id="section-8.1-3.3">
               optionally, one <a href="#HEADERS" class="xref">HEADERS</a> frame, followed by
               zero or more <a href="#CONTINUATION" class="xref">CONTINUATION</a> frames
-              containing the trailer-part, if present (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.5" class="relref">Section 6.5</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1-3.3" class="pilcrow">¶</a>
+              containing the trailer-part, if present (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.5" class="relref">Section 6.5</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1-3.3" class="pilcrow">¶</a>
 </li>
         </ol>
 <p id="section-8.1-4">
           For a response only, a server MAY send any number of interim responses before the <a href="#HEADERS" class="xref">HEADERS</a> frame containing a final response.  An
           interim response consists of a <a href="#HEADERS" class="xref">HEADERS</a> frames
           (which might be followed by zero or more <a href="#CONTINUATION" class="xref">CONTINUATION</a> frames) containing the control data and header section
-          of an interim (1xx) HTTP response (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-15" class="relref">Section 15</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  A <a href="#HEADERS" class="xref">HEADERS</a> frame with an END_STREAM flag that carries
+          of an interim (1xx) HTTP response (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-15" class="relref">Section 15</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  A <a href="#HEADERS" class="xref">HEADERS</a> frame with an END_STREAM flag that carries
           an informational status code is <span><a href="#malformed" class="xref">malformed</a> (<a href="#malformed" class="xref">Section 8.1.2.6</a>)</span>.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 <p id="section-8.1-5">
           The last frame in the sequence bears an END_STREAM flag, noting that a
@@ -3929,7 +3745,7 @@ address div.right {
           and any <a href="#CONTINUATION" class="xref">CONTINUATION</a> frames that might follow.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
 <p id="section-8.1-7">
           HTTP/2 uses DATA frames to carry message content.  The <code>chunked</code> transfer encoding
-          defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-14#section-7.1" class="relref">Section 7.1</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span> cannot be used in HTTP/2.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
+          defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-15#section-7.1" class="relref">Section 7.1</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span> cannot be used in HTTP/2.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
 <p id="section-8.1-8">
           Trailer fields are carried in a field block that also terminates the stream.  That is,
           trailer fields comprise a sequence starting with a <a href="#HEADERS" class="xref">HEADERS</a> frame, followed by zero or more <a href="#CONTINUATION" class="xref">CONTINUATION</a> frames, where the <a href="#HEADERS" class="xref">HEADERS</a> frame bears an END_STREAM flag.  Trailers MUST NOT include
@@ -3964,7 +3780,7 @@ address div.right {
           </h4>
 <p id="section-8.1.1-1">
             HTTP/2 removes support for the 101 (Switching Protocols) informational status code
-            (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-15.2.2" class="relref">Section 15.2.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
+            (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-15.2.2" class="relref">Section 15.2.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.1.1-2">
             The semantics of 101 (Switching Protocols) aren't applicable to a multiplexed protocol.
             Alternative protocols are able to use the same mechanisms that HTTP/2 uses to negotiate
@@ -3990,12 +3806,10 @@ address div.right {
 <a href="#section-8.1.2.1" class="section-number selfRef">8.1.2.1. </a><a href="#name-pseudo-header-fields" class="section-name selfRef">Pseudo-Header Fields</a>
             </h5>
 <p id="section-8.1.2.1-1">
-              While HTTP/1.x used the message start-line (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-14#section-2.1" class="relref">Section 2.1</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span>)
-              to convey control data, HTTP/2 uses special pseudo-header fields beginning with ':'
-              character (ASCII 0x3a) for this purpose.<a href="#section-8.1.2.1-1" class="pilcrow">¶</a></p>
+              HTTP/2 uses special pseudo-header fields beginning with ':' character (ASCII 0x3a) to
+              convey message control data (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.2" class="relref">Section 6.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.1-2">
-              Pseudo-header fields are not HTTP header fields.  Pseudo-header fields contain control
-              data (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.2" class="relref">Section 6.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  Endpoints MUST NOT generate
+              Pseudo-header fields are not HTTP header fields.  Endpoints MUST NOT generate
               pseudo-header fields other than those defined in this document.  Note that an
               extension could negotiate the use of additional pseudo-header fields; see
               <a href="#extensibility" class="xref">Section 5.5</a>.<a href="#section-8.1.2.1-2" class="pilcrow">¶</a></p>
@@ -4026,7 +3840,7 @@ address div.right {
               request; when it is, it MUST NOT contain any value other than "trailers".<a href="#section-8.1.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.2-3">
               An intermediary transforming a HTTP/1.x message to HTTP/2 MUST remove connection-specific
-              header fields as discussed in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-7.6.1" class="relref">Section 7.6.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>,
+              header fields as discussed in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-7.6.1" class="relref">Section 7.6.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>,
               or their messages will be treated by other HTTP/2 endpoints as <span><a href="#malformed" class="xref">malformed</a> (<a href="#malformed" class="xref">Section 8.1.2.6</a>)</span>.<a href="#section-8.1.2.2-3" class="pilcrow">¶</a></p>
 <aside id="section-8.1.2.2-4">
               <p id="section-8.1.2.2-4.1">Note:
@@ -4046,15 +3860,18 @@ address div.right {
 <li class="normal" id="section-8.1.2.3-2.1">
                 <p id="section-8.1.2.3-2.1.1">
                     The <code>:method</code> pseudo-header field includes the HTTP
-                    method (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-9" class="relref">Section 9</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.3-2.1.1" class="pilcrow">¶</a></p>
+                    method (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-9" class="relref">Section 9</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1.2.3-2.2">
                 <p id="section-8.1.2.3-2.2.1">
-                    The <code>:scheme</code> pseudo-header field includes the scheme
-                    portion of the target URI (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>).<a href="#section-8.1.2.3-2.2.1" class="pilcrow">¶</a></p>
-<p id="section-8.1.2.3-2.2.2"><code>:scheme</code> is not restricted to <code>http</code> and <code>https</code> schemed URIs.  A
-                    proxy or gateway can translate requests for non-HTTP schemes, enabling the use
-                    of HTTP to interact with non-HTTP services.<a href="#section-8.1.2.3-2.2.2" class="pilcrow">¶</a></p>
+                  The <code>:scheme</code> pseudo-header field includes the scheme portion of the
+                  request target.  The scheme is taken from the target URI (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>) when generating a request directly, or from the scheme of a
+                  translated request (for example. see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-15#section-3.3" class="relref">Section 3.3</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span>).
+                  Scheme is omitted for <span><a href="#CONNECT" class="xref">CONNECT requests</a> (<a href="#CONNECT" class="xref">Section 8.3</a>)</span>.<a href="#section-8.1.2.3-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.3-2.2.2">
+                  <code>:scheme</code> is not restricted to <code>http</code> and <code>https</code> schemed
+                  URIs.  A proxy or gateway can translate requests for non-HTTP schemes, enabling
+                  the use of HTTP to interact with non-HTTP services.<a href="#section-8.1.2.3-2.2.2" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1.2.3-2.3">
                 <p id="section-8.1.2.3-2.3.1">
@@ -4063,15 +3880,33 @@ address div.right {
                     authority MUST NOT include the deprecated <code>userinfo</code> subcomponent for
                     <code>http</code> or <code>https</code> schemed URIs.<a href="#section-8.1.2.3-2.3.1" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.3-2.3.2">
-                    To ensure that HTTP/1.1 control data can be reproduced accurately, this
-                    pseudo-header field MUST be omitted when translating from an HTTP/1.1 request
-                    that has a request target in origin or asterisk form (see
-                    <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-14#section-3.2" class="relref">Section 3.2</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span>). Clients that generate HTTP/2 requests
-                    directly SHOULD use the <code>:authority</code> pseudo-header
-                    field instead of the <code>Host</code> header field. An
-                    intermediary that converts an HTTP/2 request to HTTP/1.1 MUST create a <code>Host</code> header field if one is not present in a request by
-                    copying the value of the <code>:authority</code> pseudo-header
-                    field.<a href="#section-8.1.2.3-2.3.2" class="pilcrow">¶</a></p>
+                  Clients that generate HTTP/2 requests directly SHOULD use the <code>:authority</code>
+                  pseudo-header field instead of the <code>Host</code> header field.<a href="#section-8.1.2.3-2.3.2" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.3-2.3.3">
+                  An intermediary that translates a request to HTTP/2 from another HTTP version MUST
+                  translate any authority information from the request into an <code>:authority</code>
+                  pseudo-header field.  If the control data in the original request contains
+                  authority information, an intermediary MUST include a <code>:authority</code>
+                  pseudo-header field.  If control data does not contain authority, an intermediary
+                  MUST NOT add an <code>:authority</code> pseudo-header field.  For reference, an
+                  HTTP/1.1 <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-15#section-3.2" class="relref">Section 3.2</a> of request target [<a href="#HTTP11" class="xref">HTTP11</a>]</span> in
+                  authority-form always includes authority, a request target in absolute-form
+                  includes authority if the target URI includes authority, and request targets in
+                  origin- or asterisk-form do not include authority.<a href="#section-8.1.2.3-2.3.3" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.3-2.3.4">
+                  An intermediary that translates a request to another HTTP version from HTTP/2 can
+                  construct a <code>Host</code> header field by copying the value of the
+                  <code>:authority</code> pseudo-header field if that version requires that
+                  <code>Host</code> be included in a request, as HTTP/1.1 does for some forms of request
+                  target (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-15#section-3.2" class="relref">Section 3.2</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span>).<a href="#section-8.1.2.3-2.3.4" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.3-2.3.5">
+                  An intermediary that translates a request to HTTP/2 from another HTTP version MUST
+                  retain any <code>Host</code> header field, even if an authority is part of control
+                  data.<a href="#section-8.1.2.3-2.3.5" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.3-2.3.6">
+                  The value of the <code>Host</code> header field MUST be ignored if control data
+                  contains authority (that is, the <code>:authority</code> pseudo-header field is
+                  present).<a href="#section-8.1.2.3-2.3.6" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-8.1.2.3-2.4">
                 <p id="section-8.1.2.3-2.4.1">
@@ -4087,7 +3922,7 @@ address div.right {
                     MUST include a value of '/'. The exception to this rule is an OPTIONS request
                     for an <code>http</code> or <code>https</code> URI that does not include a path
                     component; these MUST include a <code>:path</code> pseudo-header field with a value
-                    of '*' (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-7.1" class="relref">Section 7.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.3-2.4.2" class="pilcrow">¶</a></p>
+                    of '*' (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-7.1" class="relref">Section 7.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.3-2.4.2" class="pilcrow">¶</a></p>
 </li>
             </ul>
 <p id="section-8.1.2.3-3">
@@ -4096,7 +3931,7 @@ address div.right {
 <p id="section-8.1.2.3-4">
               Individual HTTP/2 requests do not carry an explicit indicator of protocol version.
               All HTTP/2 messages implicitly have a protocol version of "2.0" (see
-              <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.2" class="relref">Section 6.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.3-4" class="pilcrow">¶</a></p>
+              <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.2" class="relref">Section 6.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-8.1.2.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="HttpResponse">
@@ -4107,7 +3942,7 @@ address div.right {
 <p id="section-8.1.2.4-1">
               For HTTP/2 responses, a single <code>:status</code> pseudo-header
               field is defined that carries the HTTP status code field (see
-              <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-15" class="relref">Section 15</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>). This pseudo-header field MUST be included in all
+              <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-15" class="relref">Section 15</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>). This pseudo-header field MUST be included in all
               responses, including interim responses; otherwise, the response is
               <span><a href="#malformed" class="xref">malformed</a> (<a href="#malformed" class="xref">Section 8.1.2.6</a>)</span>.<a href="#section-8.1.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.4-2">
@@ -4123,7 +3958,7 @@ address div.right {
               The <span><a href="#COOKIE" class="xref">Cookie header field</a> [<a href="#COOKIE" class="xref">COOKIE</a>]</span> uses a semi-colon (";") to
               delimit cookie-pairs (or "crumbs").  This header field contains multiple values, but
               does not use a COMMA (",") as a separator, which prevents cookie-pairs from being sent
-              on multiple field lines (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-5.2" class="relref">Section 5.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  This can
+              on multiple field lines (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-5.2" class="relref">Section 5.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  This can
               significantly reduce compression efficiency as updates to individual cookie-pairs
               would invalidate any field lines that are stored in the HPACK table.<a href="#section-8.1.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.5-2">
@@ -4161,7 +3996,7 @@ address div.right {
               A request or response that includes message content can include a <code>content-length</code> header field.  A request or response is also
               malformed if the value of a <code>content-length</code> header field
               does not equal the sum of the <a href="#DATA" class="xref">DATA</a> frame payload lengths that form the
-              content.  A response that is defined to have no content, as described in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-6.4" class="relref">Section 6.4</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>, can have a non-zero
+              content.  A response that is defined to have no content, as described in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-6.4" class="relref">Section 6.4</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>, can have a non-zero
               <code>content-length</code> header field, even though no content is
               included in <a href="#DATA" class="xref">DATA</a> frames.<a href="#section-8.1.2.6-2" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.6-3">
@@ -4170,10 +4005,20 @@ address div.right {
               requests or responses that are detected MUST be treated as a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-8.1.2.6-3" class="pilcrow">¶</a></p>
 <p id="section-8.1.2.6-4">
               For malformed requests, a server MAY send an HTTP response prior to closing or
-              resetting the stream.  Clients MUST NOT accept a malformed response. Note that these
-              requirements are intended to protect against several types of common attacks against
-              HTTP; they are deliberately strict because being permissive can expose
-              implementations to these vulnerabilities.<a href="#section-8.1.2.6-4" class="pilcrow">¶</a></p>
+              resetting the stream.  Clients MUST NOT accept a malformed response.<a href="#section-8.1.2.6-4" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.6-5">
+              Endpoints that progressively process messages might have performed some processing
+              before identifying a request or response as malformed.  For instance, it might be
+              possible to generate an informational or 404 status code without having received a
+              complete request.  Similarly, intermediaries might forward incomplete messages before
+              detecting errors.  A server MAY generate a final response before receiving an entire
+              request when the response does not depend on the remainder of the request being
+              correct.  A server or intermediary MAY use <a href="#RST_STREAM" class="xref">RST_STREAM</a> -- with a code other than <a href="#REFUSED_STREAM" class="xref">REFUSED_STREAM</a> -- to abort a stream if a
+              malformed request or response is received.<a href="#section-8.1.2.6-5" class="pilcrow">¶</a></p>
+<p id="section-8.1.2.6-6">
+              These requirements are intended to protect against several types of common attacks
+              against HTTP; they are deliberately strict because being permissive can expose
+              implementations to these vulnerabilities.<a href="#section-8.1.2.6-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4361,43 +4206,51 @@ address div.right {
 <p id="section-8.2-1">
           HTTP/2 allows a server to pre-emptively send (or "push") responses (along with
           corresponding "promised" requests) to a client in association with a previous
-          client-initiated request. This can be useful when the server knows the client will need
-          to have those responses available in order to fully process the response to the original
-          request.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+          client-initiated request.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <p id="section-8.2-2">
+          Server push was designed to allow a server to improve client-perceived performance by
+          predicting what requests will follow those that it receives, thereby removing a round
+          trip for them. For example, a request for HTML is often followed by requests
+          for stylesheets and scripts referenced by that page. When these requests
+          are pushed, the client does not need to wait to receive the references to them in the HTML
+          and issue separate requests.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.2-3">
+          In practice, server push is difficult to use effectively, because it requires the
+          server to correctly anticipate the additional requests the client will make, taking into
+          account factors such as caching, content negotiation, and user behavior. Errors in
+          prediction can lead to performance degradation, due to the opportunity cost that the
+          additional data on the wire represents. In particular, pushing any significant amount of
+          data can cause contention issues with more-important responses.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
+<p id="section-8.2-4">
           A client can request that server push be disabled, though this is negotiated for each hop
           independently. The <a href="#SETTINGS_ENABLE_PUSH" class="xref">SETTINGS_ENABLE_PUSH</a> setting can be set to 0 to indicate
-          that server push is disabled.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
-<p id="section-8.2-3">
-          Promised requests MUST be safe (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-9.2.1" class="relref">Section 9.2.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>) and cacheable
-          (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-9.2.3" class="relref">Section 9.2.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  Promised requests cannot include any content or a trailer section. Clients
+          that server push is disabled.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
+<p id="section-8.2-5">
+          Promised requests MUST be safe (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-9.2.1" class="relref">Section 9.2.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>) and cacheable
+          (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-9.2.3" class="relref">Section 9.2.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).  Promised requests cannot include any content or a trailer section. Clients
           that receive a promised request that is not cacheable, that is not known to be safe, or
           that indicates the presence of request content MUST reset the promised stream with a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.  Note this could result in the promised stream being
-          reset if the client does not recognize a newly defined method as being safe.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
-<p id="section-8.2-4">
-          Pushed responses that are cacheable (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-cache-14#section-3" class="relref">Section 3</a> of [<a href="#CACHE" class="xref">CACHE</a>]</span>) can be stored by the client, if it implements an HTTP
-          cache.  Pushed responses are considered successfully validated on the origin server (e.g.,
-          if the "no-cache" cache response directive is present; see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-cache-14#section-5.2.2.3" class="relref">Section 5.2.2.3</a> of [<a href="#CACHE" class="xref">CACHE</a>]</span>) while the stream identified by the
-          promised stream ID is still open.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
-<p id="section-8.2-5">
-          Pushed responses that are not cacheable MUST NOT be stored by any HTTP cache. They MAY
-          be made available to the application separately.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
+          reset if the client does not recognize a newly defined method as being safe.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
 <p id="section-8.2-6">
+          Pushed responses that are cacheable (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-cache-15#section-3" class="relref">Section 3</a> of [<a href="#CACHE" class="xref">CACHE</a>]</span>) can be stored by the client, if it implements an HTTP
+          cache.  Pushed responses are considered successfully validated on the origin server (e.g.,
+          if the "no-cache" cache response directive is present; see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-cache-15#section-5.2.2.3" class="relref">Section 5.2.2.3</a> of [<a href="#CACHE" class="xref">CACHE</a>]</span>) while the stream identified by the
+          promised stream ID is still open.<a href="#section-8.2-6" class="pilcrow">¶</a></p>
+<p id="section-8.2-7">
+          Pushed responses that are not cacheable MUST NOT be stored by any HTTP cache. They MAY
+          be made available to the application separately.<a href="#section-8.2-7" class="pilcrow">¶</a></p>
+<p id="section-8.2-8">
           The server MUST include a value in the <code>:authority</code> pseudo-header field
           for which the server is authoritative (see <a href="#authority" class="xref">Section 10.1</a>).  A client MUST
-          treat a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> for which the server is not authoritative as a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-8.2-6" class="pilcrow">¶</a></p>
-<p id="section-8.2-7">
+          treat a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> for which the server is not authoritative as a <span><a href="#StreamErrorHandler" class="xref">stream error</a> (<a href="#StreamErrorHandler" class="xref">Section 5.4.2</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-8.2-8" class="pilcrow">¶</a></p>
+<p id="section-8.2-9">
           An intermediary can receive pushes from the server and choose not to forward them on to
           the client. In other words, how to make use of the pushed information is up to that
           intermediary. Equally, the intermediary might choose to make additional pushes to the
-          client, without any action taken by the server.<a href="#section-8.2-7" class="pilcrow">¶</a></p>
-<p id="section-8.2-8">
-          A client cannot push. Thus, servers MUST treat the receipt of a
-          <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame as a <span><a href="#ConnectionErrorHandler" class="xref">connection
-          error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>. Clients MUST reject any attempt to
-          change the <a href="#SETTINGS_ENABLE_PUSH" class="xref">SETTINGS_ENABLE_PUSH</a> setting to a value other than 0 by treating
-          the message as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type
-          <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>.<a href="#section-8.2-8" class="pilcrow">¶</a></p>
+          client, without any action taken by the server.<a href="#section-8.2-9" class="pilcrow">¶</a></p>
+<p id="section-8.2-10">
+          A client cannot push. Thus, servers MUST treat the receipt of a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frame as a <span><a href="#ConnectionErrorHandler" class="xref">connection error</a> (<a href="#ConnectionErrorHandler" class="xref">Section 5.4.1</a>)</span> of type <a href="#PROTOCOL_ERROR" class="xref">PROTOCOL_ERROR</a>. A server cannot set the <a href="#SETTINGS_ENABLE_PUSH" class="xref">SETTINGS_ENABLE_PUSH</a> setting to a value
+          other than 0 (see <a href="#SettingValues" class="xref">Section 6.5.2</a>).<a href="#section-8.2-10" class="pilcrow">¶</a></p>
 <div id="PushRequests">
 <section id="section-8.2.1">
           <h4 id="name-push-requests">
@@ -4436,7 +4289,7 @@ address div.right {
             image links ensures that the client is able to see that a resource will be pushed
             before discovering embedded links. Similarly, if the server pushes responses referenced by the field block
             (for instance, in Link header fields), sending a <a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> before sending the
-            header block ensures that clients do not request those resources.<a href="#section-8.2.1-6" class="pilcrow">¶</a></p>
+            header ensures that clients do not request those resources.<a href="#section-8.2.1-6" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-7"><a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frames MUST NOT be sent by the client.<a href="#section-8.2.1-7" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-8"><a href="#PUSH_PROMISE" class="xref">PUSH_PROMISE</a> frames can be sent by the server in response to any
             client-initiated stream, but the stream MUST be in either the "open" or "half-closed
@@ -4503,7 +4356,7 @@ address div.right {
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-the-connect-method" class="section-name selfRef">The CONNECT Method</a>
         </h3>
 <p id="section-8.3-1">
-          In HTTP/1.x, the pseudo-method CONNECT (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>) is
+          In HTTP/1.x, the pseudo-method CONNECT (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>) is
           used to convert an HTTP connection into a tunnel to a remote host.
           CONNECT is primarily used with HTTP proxies to establish a TLS session with an origin
           server for the purposes of interacting with <code>https</code> resources.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
@@ -4523,7 +4376,7 @@ address div.right {
           <li class="normal" id="section-8.3-3.3">
               The <code>:authority</code> pseudo-header field contains the host and port to
               connect to (equivalent to the authority-form of the request-target of CONNECT
-              requests; see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-14#section-3.2.3" class="relref">Section 3.2.3</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span>).<a href="#section-8.3-3.3" class="pilcrow">¶</a>
+              requests; see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-messaging-15#section-3.2.3" class="relref">Section 3.2.3</a> of [<a href="#HTTP11" class="xref">HTTP11</a>]</span>).<a href="#section-8.3-3.3" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-8.3-4">
@@ -4532,7 +4385,7 @@ address div.right {
           A proxy that supports CONNECT establishes a <span><a href="#TCP" class="xref">TCP connection</a> [<a href="#TCP" class="xref">TCP</a>]</span> to
           the host and port identified in the <code>:authority</code> pseudo-header field. Once
           this connection is successfully established, the proxy sends a <a href="#HEADERS" class="xref">HEADERS</a>
-          frame containing a 2xx series status code to the client, as defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-8.3-5" class="pilcrow">¶</a></p>
+          frame containing a 2xx series status code to the client, as defined in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-8.3-5" class="pilcrow">¶</a></p>
 <p id="section-8.3-6">
           After the initial <a href="#HEADERS" class="xref">HEADERS</a> frame sent by each peer, all subsequent
           <a href="#DATA" class="xref">DATA</a> frames correspond to data sent on the TCP connection.  The frame payload of
@@ -4616,7 +4469,7 @@ address div.right {
             on having a certificate that is valid for the host in the URI.  The certificate
             presented by the server MUST satisfy any checks that the client would perform when
             forming a new TLS connection for the host in the URI.  A single certificate can be
-            used to establish authority for multiple origins.  <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-4.3" class="relref">Section 4.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>
+            used to establish authority for multiple origins.  <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-4.3" class="relref">Section 4.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>
             describes how a client determines whether a server is authoritative for a URI.<a href="#section-9.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.1.1-3">
             In some deployments, reusing a connection for multiple origins can result in requests
@@ -4628,7 +4481,7 @@ address div.right {
 <p id="section-9.1.1-4">
             A server that does not wish clients to reuse connections can indicate that it is not
             authoritative for a request by sending a 421 (Misdirected Request) status code in response
-            to the request (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-15.5.20" class="relref">Section 15.5.20</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-9.1.1-4" class="pilcrow">¶</a></p>
+            to the request (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-15.5.20" class="relref">Section 15.5.20</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-9.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-9.1.1-5">
             A client that is configured to use a proxy over HTTP/2 directs requests to that proxy
             through a single connection.  That is, all requests sent via a proxy reuse the
@@ -4772,7 +4625,7 @@ address div.right {
         </h3>
 <p id="section-10.1-1">
           HTTP/2 relies on the HTTP definition of authority for determining whether a server is
-          authoritative in providing a given response (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-4.3" class="relref">Section 4.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).
+          authoritative in providing a given response (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-4.3" class="relref">Section 4.3</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).
           This relies on local name resolution for the "http" URI scheme and the authenticated server
           identity for the "https" scheme.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 </section>
@@ -4816,7 +4669,13 @@ address div.right {
           that can be encoded will not alter header field parsing, carriage return (CR, ASCII 0xd),
           line feed (LF, ASCII 0xa), and the zero character (NUL, ASCII 0x0) might be exploited by
           an attacker if they are translated verbatim.  Any request or response that contains a
-          character not permitted in a field value MUST be treated as <span><a href="#malformed" class="xref">malformed</a> (<a href="#malformed" class="xref">Section 8.1.2.6</a>)</span>.  Valid characters are defined by the <code>field-content</code> ABNF rule in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-5.5" class="relref">Section 5.5</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-10.3-2" class="pilcrow">¶</a></p>
+          character not permitted in a field value MUST be treated as <span><a href="#malformed" class="xref">malformed</a> (<a href="#malformed" class="xref">Section 8.1.2.6</a>)</span>.  Valid characters are defined by the <code>field-content</code> ABNF rule in <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-5.5" class="relref">Section 5.5</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>.<a href="#section-10.3-2" class="pilcrow">¶</a></p>
+<p id="section-10.3-3">
+          An intermediary that receives any field that requires removal before forwarding
+          (see <span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-7.6.1" class="relref">Section 7.6.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>) must remove or replace those header fields when
+          forwarding messages, including between multiple messaging formats. Additionally, intermediaries
+          should take care when forwarding messages containing Content-Length fields to ensure that the
+          message is <span><a href="#malformed" class="xref">well-formed</a> (<a href="#malformed" class="xref">Section 8.1.2.6</a>)</span>.<a href="#section-10.3-3" class="pilcrow">¶</a></p>
 </section>
 <section id="section-10.4">
         <h3 id="name-cacheability-of-pushed-resp">
@@ -4890,7 +4749,7 @@ address div.right {
           <li class="normal" id="section-10.5-4.3">
             The <a href="#SETTINGS" class="xref">SETTINGS</a> frame might also be abused to
             cause a peer to expend additional processing time.  This might be done by pointlessly
-            changing SETTINGS parameters, setting multiple undefined parameters, or changing the
+            changing settings, sending multiple undefined settings, or changing the
             same setting multiple times in the same frame.<a href="#section-10.5-4.3" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-10.5-4.4">
@@ -4902,9 +4761,9 @@ address div.right {
             <span><a href="https://rfc-editor.org/rfc/rfc7541#section-7" class="relref">Section 7</a> of [<a href="#COMPRESSION" class="xref">COMPRESSION</a>]</span> for more details on potential abuses.<a href="#section-10.5-4.5" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-10.5-4.6">
-            Limits in <a href="#SETTINGS" class="xref">SETTINGS</a> parameters cannot be
-            reduced instantaneously, which leaves an endpoint exposed to behavior from a peer that
-            could exceed the new limits. In particular, immediately after establishing a connection,
+            Limits in <a href="#SETTINGS" class="xref">SETTINGS</a> cannot be reduced
+            instantaneously, which leaves an endpoint exposed to behavior from a peer that could
+            exceed the new limits. In particular, immediately after establishing a connection,
             limits set by a server are not known to clients and could be exceeded without being an
             obvious protocol violation.<a href="#section-10.5-4.6" class="pilcrow">¶</a>
 </li>
@@ -4976,7 +4835,7 @@ address div.right {
           Compression can allow an attacker to recover secret data when it is compressed in the same
           context as data under attacker control.  HTTP/2 enables compression of field lines
           (<a href="#FieldBlock" class="xref">Section 4.3</a>); the following concerns also apply to the use of HTTP
-          compressed content-codings (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-8.4.1" class="relref">Section 8.4.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-10.6-1" class="pilcrow">¶</a></p>
+          compressed content-codings (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-8.4.1" class="relref">Section 8.4.1</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-10.6-1" class="pilcrow">¶</a></p>
 <p id="section-10.6-2">
           There are demonstrable attacks on compression that exploit the characteristics of the web
           (e.g., <span>[<a href="#BREACH" class="xref">BREACH</a>]</span>).  The attacker induces multiple requests containing
@@ -5057,7 +4916,7 @@ address div.right {
         (ALPN) Protocol IDs" registry established in <span>[<a href="#TLS-ALPN" class="xref">TLS-ALPN</a>]</span>.<a href="#section-11-1" class="pilcrow">¶</a></p>
 <p id="section-11-2">
         This document establishes a registry for frame types, settings, and error codes.  These new
-        registries appear in the new "Hypertext Transfer Protocol version 2 (HTTP/2) Parameters" section.<a href="#section-11-2" class="pilcrow">¶</a></p>
+        registries appear in the new "Hypertext Transfer Protocol version 2 (HTTP/2)" section.<a href="#section-11-2" class="pilcrow">¶</a></p>
 <p id="section-11-3">
         This document registers the <code>HTTP2-Settings</code> header field for
         use in HTTP.<a href="#section-11-3" class="pilcrow">¶</a></p>
@@ -5504,7 +5363,7 @@ address div.right {
         </h3>
 <p id="section-11.6-1">
           This section registers the <code>PRI</code> method in the "HTTP Method
-          Registry" (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-14#section-18.2" class="relref">Section 18.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-11.6-1" class="pilcrow">¶</a></p>
+          Registry" (<span><a href="https://tools.ietf.org/html/draft-ietf-httpbis-semantics-15#section-18.2" class="relref">Section 18.2</a> of [<a href="#HTTP" class="xref">HTTP</a>]</span>).<a href="#section-11.6-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-11.6-2">
           <dt id="section-11.6-2.1">Method Name:</dt>
           <dd style="margin-left: 1.5em" id="section-11.6-2.2">
@@ -5558,11 +5417,11 @@ address div.right {
 <dl class="references">
 <dt id="CACHE">[CACHE]</dt>
         <dd>
-<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor">, Nottingham, M., Ed.</span><span class="refAuthor">, and J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Caching"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-cache-14</span>, <time datetime="2021-01-13" class="refDate">13 January 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cache-14.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cache-14.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Caching"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-cache-15</span>, <time datetime="2021-03-30" class="refDate">30 March 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cache-15.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cache-15.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="COMPRESSION">[COMPRESSION]</dt>
         <dd>
-<span class="refAuthor">Peon, R.</span><span class="refAuthor"> and H. Ruellan</span>, <span class="refTitle">"HPACK: Header Compression for HTTP/2"</span>, <span class="seriesInfo">RFC 7541</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7541">https://datatracker.ietf.org/doc/html/rfc7541</a>&gt;</span>. </dd>
+<span class="refAuthor">Peon, R.</span> and <span class="refAuthor">H. Ruellan</span>, <span class="refTitle">"HPACK: Header Compression for HTTP/2"</span>, <span class="seriesInfo">RFC 7541</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7541">https://datatracker.ietf.org/doc/html/rfc7541</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="COOKIE">[COOKIE]</dt>
         <dd>
@@ -5574,11 +5433,7 @@ address div.right {
 <dd class="break"></dd>
 <dt id="HTTP">[HTTP]</dt>
         <dd>
-<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor">, Nottingham, M., Ed.</span><span class="refAuthor">, and J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-semantics-14</span>, <time datetime="2021-01-13" class="refDate">13 January 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-semantics-14.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-semantics-14.txt</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="HTTP11">[HTTP11]</dt>
-        <dd>
-<span class="refAuthor">Fielding, R., Ed.</span><span class="refAuthor">, Nottingham, M., Ed.</span><span class="refAuthor">, and J. Reschke, Ed.</span>, <span class="refTitle">"HTTP/1.1"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-messaging-14</span>, <time datetime="2021-01-13" class="refDate">13 January 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-messaging-14.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-messaging-14.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-semantics-15</span>, <time datetime="2021-03-30" class="refDate">30 March 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-semantics-15.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-semantics-15.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -5586,7 +5441,7 @@ address div.right {
 <dd class="break"></dd>
 <dt id="RFC3986">[RFC3986]</dt>
         <dd>
-<span class="refAuthor">Berners-Lee, T.</span><span class="refAuthor">, Fielding, R.</span><span class="refAuthor">, and L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc3986">https://datatracker.ietf.org/doc/html/rfc3986</a>&gt;</span>. </dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc3986">https://datatracker.ietf.org/doc/html/rfc3986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4648">[RFC4648]</dt>
         <dd>
@@ -5594,19 +5449,15 @@ address div.right {
 <dd class="break"></dd>
 <dt id="RFC5226">[RFC5226]</dt>
         <dd>
-<span class="refAuthor">Narten, T.</span><span class="refAuthor"> and H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc5226">https://datatracker.ietf.org/doc/html/rfc5226</a>&gt;</span>. </dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc5226">https://datatracker.ietf.org/doc/html/rfc5226</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5234">[RFC5234]</dt>
         <dd>
-<span class="refAuthor">Crocker, D., Ed.</span><span class="refAuthor"> and P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc5234">https://datatracker.ietf.org/doc/html/rfc5234</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7540">[RFC7540]</dt>
-        <dd>
-<span class="refAuthor">Belshe, M.</span><span class="refAuthor">, Peon, R.</span><span class="refAuthor">, and M. Thomson, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol Version 2 (HTTP/2)"</span>, <span class="seriesInfo">RFC 7540</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7540">https://datatracker.ietf.org/doc/html/rfc7540</a>&gt;</span>. </dd>
+<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc5234">https://datatracker.ietf.org/doc/html/rfc5234</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8470">[RFC8470]</dt>
         <dd>
-<span class="refAuthor">Thomson, M.</span><span class="refAuthor">, Nottingham, M.</span><span class="refAuthor">, and W. Tarreau</span>, <span class="refTitle">"Using Early Data in HTTP"</span>, <span class="seriesInfo">RFC 8470</span>, <span class="seriesInfo">DOI 10.17487/RFC8470</span>, <time datetime="2018-09" class="refDate">September 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8470">https://datatracker.ietf.org/doc/html/rfc8470</a>&gt;</span>. </dd>
+<span class="refAuthor">Thomson, M.</span>, <span class="refAuthor">Nottingham, M.</span>, and <span class="refAuthor">W. Tarreau</span>, <span class="refTitle">"Using Early Data in HTTP"</span>, <span class="seriesInfo">RFC 8470</span>, <span class="seriesInfo">DOI 10.17487/RFC8470</span>, <time datetime="2018-09" class="refDate">September 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8470">https://datatracker.ietf.org/doc/html/rfc8470</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TCP">[TCP]</dt>
         <dd>
@@ -5614,7 +5465,7 @@ address div.right {
 <dd class="break"></dd>
 <dt id="TLS-ALPN">[TLS-ALPN]</dt>
         <dd>
-<span class="refAuthor">Friedl, S.</span><span class="refAuthor">, Popov, A.</span><span class="refAuthor">, Langley, A.</span><span class="refAuthor">, and E. Stephan</span>, <span class="refTitle">"Transport Layer Security (TLS) Application-Layer Protocol Negotiation Extension"</span>, <span class="seriesInfo">RFC 7301</span>, <time datetime="2014-07" class="refDate">July 2014</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7301">https://datatracker.ietf.org/doc/html/rfc7301</a>&gt;</span>. </dd>
+<span class="refAuthor">Friedl, S.</span>, <span class="refAuthor">Popov, A.</span>, <span class="refAuthor">Langley, A.</span>, and <span class="refAuthor">E. Stephan</span>, <span class="refTitle">"Transport Layer Security (TLS) Application-Layer Protocol Negotiation Extension"</span>, <span class="seriesInfo">RFC 7301</span>, <time datetime="2014-07" class="refDate">July 2014</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7301">https://datatracker.ietf.org/doc/html/rfc7301</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TLS-ECDHE">[TLS-ECDHE]</dt>
         <dd>
@@ -5626,7 +5477,7 @@ address div.right {
 <dd class="break"></dd>
 <dt id="TLS12">[TLS12]</dt>
         <dd>
-<span class="refAuthor">Dierks, T.</span><span class="refAuthor"> and E. Rescorla</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.2"</span>, <span class="seriesInfo">RFC 5246</span>, <time datetime="2008-08" class="refDate">August 2008</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc5246">https://datatracker.ietf.org/doc/html/rfc5246</a>&gt;</span>. </dd>
+<span class="refAuthor">Dierks, T.</span> and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.2"</span>, <span class="seriesInfo">RFC 5246</span>, <time datetime="2008-08" class="refDate">August 2008</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc5246">https://datatracker.ietf.org/doc/html/rfc5246</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TLS13">[TLS13]</dt>
       <dd>
@@ -5641,19 +5492,27 @@ address div.right {
 <dl class="references">
 <dt id="ALT-SVC">[ALT-SVC]</dt>
         <dd>
-<span class="refAuthor">Nottingham, M.</span><span class="refAuthor">, McManus, P.</span><span class="refAuthor">, and J. Reschke</span>, <span class="refTitle">"HTTP Alternative Services"</span>, <span class="seriesInfo">RFC 7838</span>, <time datetime="2016-04" class="refDate">April 2016</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7838">https://datatracker.ietf.org/doc/html/rfc7838</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refAuthor">McManus, P.</span>, and <span class="refAuthor">J. Reschke</span>, <span class="refTitle">"HTTP Alternative Services"</span>, <span class="seriesInfo">RFC 7838</span>, <time datetime="2016-04" class="refDate">April 2016</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7838">https://datatracker.ietf.org/doc/html/rfc7838</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="BCP90">[BCP90]</dt>
         <dd>
-<span class="refAuthor">Klyne, G.</span><span class="refAuthor">, Nottingham, M.</span><span class="refAuthor">, and J. Mogul</span>, <span class="refTitle">"Registration Procedures for Message Header Fields"</span>, <span class="seriesInfo">BCP 90</span>, <span class="seriesInfo">RFC 3864</span>, <time datetime="2004-09" class="refDate">September 2004</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc3864">https://datatracker.ietf.org/doc/html/rfc3864</a>&gt;</span>. </dd>
+<span class="refAuthor">Klyne, G.</span>, <span class="refAuthor">Nottingham, M.</span>, and <span class="refAuthor">J. Mogul</span>, <span class="refTitle">"Registration Procedures for Message Header Fields"</span>, <span class="seriesInfo">BCP 90</span>, <span class="seriesInfo">RFC 3864</span>, <time datetime="2004-09" class="refDate">September 2004</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc3864">https://datatracker.ietf.org/doc/html/rfc3864</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="BREACH">[BREACH]</dt>
         <dd>
-<span class="refAuthor">Gluck, Y.</span><span class="refAuthor">, Harris, N.</span><span class="refAuthor">, and A. Prado</span>, <span class="refTitle">"BREACH: Reviving the CRIME Attack"</span>, <time datetime="2013-07-12" class="refDate">12 July 2013</time>, <span>&lt;<a href="http://breachattack.com/resources/BREACH%20-%20SSL,%20gone%20in%2030%20seconds.pdf">http://breachattack.com/resources/BREACH%20-%20SSL,%20gone%20in%2030%20seconds.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Gluck, Y.</span>, <span class="refAuthor">Harris, N.</span>, and <span class="refAuthor">A. Prado</span>, <span class="refTitle">"BREACH: Reviving the CRIME Attack"</span>, <time datetime="2013-07-12" class="refDate">12 July 2013</time>, <span>&lt;<a href="http://breachattack.com/resources/BREACH%20-%20SSL,%20gone%20in%2030%20seconds.pdf">http://breachattack.com/resources/BREACH%20-%20SSL,%20gone%20in%2030%20seconds.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="DNS-TERMS">[DNS-TERMS]</dt>
         <dd>
-<span class="refAuthor">Hoffman, P.</span><span class="refAuthor">, Sullivan, A.</span><span class="refAuthor">, and K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">BCP 219</span>, <span class="seriesInfo">RFC 8499</span>, <span class="seriesInfo">DOI 10.17487/RFC8499</span>, <time datetime="2019-01" class="refDate">January 2019</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8499">https://datatracker.ietf.org/doc/html/rfc8499</a>&gt;</span>. </dd>
+<span class="refAuthor">Hoffman, P.</span>, <span class="refAuthor">Sullivan, A.</span>, and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">BCP 219</span>, <span class="seriesInfo">RFC 8499</span>, <span class="seriesInfo">DOI 10.17487/RFC8499</span>, <time datetime="2019-01" class="refDate">January 2019</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8499">https://datatracker.ietf.org/doc/html/rfc8499</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="HTTP11">[HTTP11]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP/1.1"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-messaging-15</span>, <time datetime="2021-03-30" class="refDate">30 March 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-messaging-15.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-messaging-15.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-httpbis-priority">[I-D.ietf-httpbis-priority]</dt>
+        <dd>
+<span class="refAuthor">Oku, K.</span> and <span class="refAuthor">L. Pardue</span>, <span class="refTitle">"Extensible Prioritization Scheme for HTTP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-httpbis-priority-03</span>, <time datetime="2021-01-11" class="refDate">11 January 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-priority-03.txt">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-priority-03.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="NFLX-2019-002">[NFLX-2019-002]</dt>
         <dd>
@@ -5661,7 +5520,7 @@ address div.right {
 <dd class="break"></dd>
 <dt id="PRIVACY">[PRIVACY]</dt>
         <dd>
-<span class="refAuthor">Cooper, A.</span><span class="refAuthor">, Tschofenig, H.</span><span class="refAuthor">, Aboba, B.</span><span class="refAuthor">, Peterson, J.</span><span class="refAuthor">, Morris, J.</span><span class="refAuthor">, Hansen, M.</span><span class="refAuthor">, and R. Smith</span>, <span class="refTitle">"Privacy Considerations for Internet Protocols"</span>, <span class="seriesInfo">RFC 6973</span>, <span class="seriesInfo">DOI 10.17487/RFC6973</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc6973">https://datatracker.ietf.org/doc/html/rfc6973</a>&gt;</span>. </dd>
+<span class="refAuthor">Cooper, A.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Aboba, B.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Morris, J.</span>, <span class="refAuthor">Hansen, M.</span>, and <span class="refAuthor">R. Smith</span>, <span class="refTitle">"Privacy Considerations for Internet Protocols"</span>, <span class="seriesInfo">RFC 6973</span>, <span class="seriesInfo">DOI 10.17487/RFC6973</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc6973">https://datatracker.ietf.org/doc/html/rfc6973</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3749">[RFC3749]</dt>
         <dd>
@@ -5669,23 +5528,31 @@ address div.right {
 <dd class="break"></dd>
 <dt id="RFC4492">[RFC4492]</dt>
         <dd>
-<span class="refAuthor">Blake-Wilson, S.</span><span class="refAuthor">, Bolyard, N.</span><span class="refAuthor">, Gupta, V.</span><span class="refAuthor">, Hawk, C.</span><span class="refAuthor">, and B. Moeller</span>, <span class="refTitle">"Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 4492</span>, <time datetime="2006-05" class="refDate">May 2006</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc4492">https://datatracker.ietf.org/doc/html/rfc4492</a>&gt;</span>. </dd>
+<span class="refAuthor">Blake-Wilson, S.</span>, <span class="refAuthor">Bolyard, N.</span>, <span class="refAuthor">Gupta, V.</span>, <span class="refAuthor">Hawk, C.</span>, and <span class="refAuthor">B. Moeller</span>, <span class="refTitle">"Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 4492</span>, <time datetime="2006-05" class="refDate">May 2006</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc4492">https://datatracker.ietf.org/doc/html/rfc4492</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6585">[RFC6585]</dt>
         <dd>
-<span class="refAuthor">Nottingham, M.</span><span class="refAuthor"> and R. Fielding</span>, <span class="refTitle">"Additional HTTP Status Codes"</span>, <span class="seriesInfo">RFC 6585</span>, <time datetime="2012-04" class="refDate">April 2012</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc6585">https://datatracker.ietf.org/doc/html/rfc6585</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">R. Fielding</span>, <span class="refTitle">"Additional HTTP Status Codes"</span>, <span class="seriesInfo">RFC 6585</span>, <time datetime="2012-04" class="refDate">April 2012</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc6585">https://datatracker.ietf.org/doc/html/rfc6585</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7323">[RFC7323]</dt>
         <dd>
-<span class="refAuthor">Borman, D.</span><span class="refAuthor">, Braden, B.</span><span class="refAuthor">, Jacobson, V.</span><span class="refAuthor">, and R. Scheffenegger, Ed.</span>, <span class="refTitle">"TCP Extensions for High Performance"</span>, <span class="seriesInfo">RFC 7323</span>, <time datetime="2014-09" class="refDate">September 2014</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7323">https://datatracker.ietf.org/doc/html/rfc7323</a>&gt;</span>. </dd>
+<span class="refAuthor">Borman, D.</span>, <span class="refAuthor">Braden, B.</span>, <span class="refAuthor">Jacobson, V.</span>, and <span class="refAuthor">R. Scheffenegger, Ed.</span>, <span class="refTitle">"TCP Extensions for High Performance"</span>, <span class="seriesInfo">RFC 7323</span>, <time datetime="2014-09" class="refDate">September 2014</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7323">https://datatracker.ietf.org/doc/html/rfc7323</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7540">[RFC7540]</dt>
+        <dd>
+<span class="refAuthor">Belshe, M.</span>, <span class="refAuthor">Peon, R.</span>, and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol Version 2 (HTTP/2)"</span>, <span class="seriesInfo">RFC 7540</span>, <span class="seriesInfo">DOI 10.17487/RFC7540</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7540">https://datatracker.ietf.org/doc/html/rfc7540</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8740">[RFC8740]</dt>
+        <dd>
+<span class="refAuthor">Benjamin, D.</span>, <span class="refTitle">"Using TLS 1.3 with HTTP/2"</span>, <span class="seriesInfo">RFC 8740</span>, <span class="seriesInfo">DOI 10.17487/RFC8740</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8740">https://datatracker.ietf.org/doc/html/rfc8740</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TALKING">[TALKING]</dt>
         <dd>
-<span class="refAuthor">Huang, L.</span><span class="refAuthor">, Chen, E.</span><span class="refAuthor">, Barth, A.</span><span class="refAuthor">, Rescorla, E.</span><span class="refAuthor">, and C. Jackson</span>, <span class="refTitle">"Talking to Yourself for Fun and Profit"</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="http://w2spconf.com/2011/papers/websocket.pdf">http://w2spconf.com/2011/papers/websocket.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Huang, L.</span>, <span class="refAuthor">Chen, E.</span>, <span class="refAuthor">Barth, A.</span>, <span class="refAuthor">Rescorla, E.</span>, and <span class="refAuthor">C. Jackson</span>, <span class="refTitle">"Talking to Yourself for Fun and Profit"</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="http://w2spconf.com/2011/papers/websocket.pdf">http://w2spconf.com/2011/papers/websocket.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TLSBCP">[TLSBCP]</dt>
       <dd>
-<span class="refAuthor">Sheffer, Y.</span><span class="refAuthor">, Holz, R.</span><span class="refAuthor">, and P. Saint-Andre</span>, <span class="refTitle">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 7525</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7525">https://datatracker.ietf.org/doc/html/rfc7525</a>&gt;</span>. </dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Holz, R.</span>, and <span class="refAuthor">P. Saint-Andre</span>, <span class="refTitle">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 7525</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7525">https://datatracker.ietf.org/doc/html/rfc7525</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -6310,8 +6177,9 @@ address div.right {
             Mike Bishop (Extensibility).<a href="#section-appendix.d-2.4" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-appendix.d-2.5">
-            Mark Nottingham, Julian Reschke, James Snell, Jeff Pinner, Mike Bishop,
-            and Herv&amp;#233; Ruellan (Substantial editorial contributions).<a href="#section-appendix.d-2.5" class="pilcrow">¶</a>
+          <p id="section-appendix.d-2.5.1">
+          Mark Nottingham, Julian Reschke, James Snell, Jeff Pinner, Mike Bishop,
+          and <span class="contact-name">Hervé Ruellan</span> (Substantial editorial contributions).<a href="#section-appendix.d-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-appendix.d-2.6">
             Kari Hurtta, Tatsuhiro Tsujikawa, Greg Wilkins, Poul-Henning Kamp,

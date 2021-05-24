@@ -5,8 +5,8 @@
 HTTPbis                                                          R. Peon
 Internet-Draft                                               Google, Inc
 Intended status: Standards Track                              H. Ruellan
-Expires: 22 August 2021                                        Canon CRF
-                                                        18 February 2021
+Expires: 25 November 2021                                      Canon CRF
+                                                             24 May 2021
 
 
                   HPACK: Header Compression for HTTP/2
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2021.
+   This Internet-Draft will expire on 25 November 2021.
 
 Copyright Notice
 
@@ -498,8 +498,8 @@ Table of Contents
    integer value does not fit within the prefix.  The number of bits of
    the prefix (called N) is a parameter of the integer representation.
 
-   If the integer value is small enough, i.e., strictly less than 2^(N)-
-   1, it is encoded within the N-bit prefix.
+   If the integer value is small enough, i.e., strictly less than 2^N-1,
+   it is encoded within the N-bit prefix.
 
      0   1   2   3   4   5   6   7
    +---+---+---+---+---+---+---+---+
@@ -509,7 +509,7 @@ Table of Contents
     Figure 2: Integer Value Encoded within the Prefix (Shown for N = 5)
 
    Otherwise, all the bits of the prefix are set to 1, and the value,
-   decreased by 2^(N)-1, is encoded using a list of one or more octets.
+   decreased by 2^N-1, is encoded using a list of one or more octets.
    The most significant bit of each octet is used as a continuation
    flag: its value is set to 1 except for the last octet in the list.
    The remaining bits of the octets are used to encode the decreased
@@ -532,7 +532,7 @@ Table of Contents
    reversing the order of the octets in the list.  Then, for each octet,
    its most significant bit is removed.  The remaining bits of the
    octets are concatenated, and the resulting value is increased by
-   2^(N)-1 to obtain the integer value.
+   2^N-1 to obtain the integer value.
 
    The prefix size, N, is always between 1 and 8 bits.  An integer
    starting at an octet boundary will have an 8-bit prefix.
@@ -1541,7 +1541,7 @@ C.1.1.  Example 1: Encoding 10 Using a 5-Bit Prefix
 
    The value 10 is to be encoded with a 5-bit prefix.
 
-   *  10 is less than 31 (2^(5) - 1) and is represented using the 5-bit
+   *  10 is less than 31 (2^5 - 1) and is represented using the 5-bit
       prefix.
 
      0   1   2   3   4   5   6   7
@@ -1553,11 +1553,11 @@ C.1.2.  Example 2: Encoding 1337 Using a 5-Bit Prefix
 
    The value I=1337 is to be encoded with a 5-bit prefix.
 
-      1337 is greater than 31 (2^(5) - 1).
+      1337 is greater than 31 (2^5 - 1).
 
       -  The 5-bit prefix is filled with its max value (31).
 
-      I = 1337 - (2^(5) - 1) = 1306.
+      I = 1337 - (2^5 - 1) = 1306.
 
       -  I (1306) is greater than or equal to 128, so the while loop
          body executes:
@@ -1589,7 +1589,7 @@ C.1.3.  Example 3: Encoding 42 Starting at an Octet Boundary
    The value 42 is to be encoded starting at an octet boundary.  This
    implies that a 8-bit prefix is used.
 
-   *  42 is less than 255 (2^(8) - 1) and is represented using the 8-bit
+   *  42 is less than 255 (2^8 - 1) and is represented using the 8-bit
       prefix.
 
      0   1   2   3   4   5   6   7
