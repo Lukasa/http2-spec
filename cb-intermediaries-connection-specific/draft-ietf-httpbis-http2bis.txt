@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 25 November 2021                                    24 May 2021
+Expires: 26 November 2021                                    25 May 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 November 2021.
+   This Internet-Draft will expire on 26 November 2021.
 
 Copyright Notice
 
@@ -3052,11 +3052,12 @@ Table of Contents
    by the "field-content" ABNF rule in Section 5.5 of [HTTP].
 
    An intermediary that receives any field that requires removal before
-   forwarding (see Section 7.6.1 of [HTTP]) must remove or replace those
-   header fields when forwarding messages, including between multiple
-   messaging formats.  Additionally, intermediaries should take care
-   when forwarding messages containing Content-Length fields to ensure
-   that the message is well-formed (Section 8.1.2.6).
+   forwarding (see Section 7.6.1 of [HTTP]) MUST remove or replace those
+   header fields when forwarding messages.  Additionally, intermediaries
+   should take care when forwarding messages containing Content-Length
+   fields to ensure that the message is well-formed (Section 8.1.2.6).
+   This ensures that if the message is translated into HTTP/1.1 at any
+   point the framing will be correct.
 
 10.4.  Cacheability of Pushed Responses
 
